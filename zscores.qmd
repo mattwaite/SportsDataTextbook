@@ -1,0 +1,127 @@
+# Z-scores
+
+Z-scores are a handy way to standardize numbers so you can compare things across groupings or time. In this class, we may want to compare teams by year, or era. We can use z-scores to answer questions like who was the greatest X of all time, because a z-score can put them in context to their era. 
+
+A z-score is a measure of how a particular stat is from the mean. It's measured in standard deviations from that mean. A standard deviation is a measure of how much variation -- how spread out -- numbers are in a data set. What it means here, with regards to z-scores, is that zero is perfectly average. If it's 1, it's one standard deviation above the mean, and 34 percent of all cases are between 0 and 1. 
+
+```{r}
+#| echo: false
+knitr::include_graphics(rep("images/simulations2.png"))
+```
+
+If you think of the normal distribution, it means that 84.3 percent of all case are below that 1. If it were -1, it would mean the number is one standard deviation below the mean, and 84.3 percent of cases would be above that -1. So if you have numbers with z-scores of 3 or even 4, that means that number is waaaaaay above the mean.  
+
+So let's use last year's Nebraska basketball team, which if haven't been paying attention to current events, was not good at basketball. 
+
+## Calculating a Z score in R
+
+For this we'll need the logs of all college basketball games last season. 
+
+```{r}
+#| warning: false
+#| message: false
+#| results: asis
+#| echo: false
+library(downloadthis)
+library(glue)
+
+dllink <- download_link(
+  link = "http://mattwaite.github.io/sportsdatafiles/logs20.csv",
+  button_label = "Download csv file",
+  button_type = "danger",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+
+glue("<pre><p><strong>For this walkthrough:</strong></p><p>{dllink}</p></pre>")
+
+```
+
+Load the tidyverse.
+
+```{r}
+#| warning: false
+#| message: false
+library(tidyverse)
+```
+
+And load the data.
+
+```{r}
+gamelogs <- read_csv("data/logs20.csv")
+```
+
+The first thing we need to do is select some fields we think represent team quality and a few things to help us keep things straight. So I'm going to pick shooting percentage, rebounding and the opponent version of the same two: 
+
+```{r}
+teamquality <- gamelogs %>% 
+  select(Conference, Team, TeamFGPCT, TeamTotalRebounds, OpponentFGPCT, OpponentTotalRebounds)
+```
+
+And since we have individual game data, we need to collapse this into one record for each team. We do that with ... group by.
+
+```{r}
+teamtotals <- teamquality %>% 
+  group_by(Conference, Team) %>% 
+  summarise(
+    FGAvg = mean(TeamFGPCT), 
+    ReboundAvg = mean(TeamTotalRebounds), 
+    OppFGAvg = mean(OpponentFGPCT),
+    OffRebAvg = mean(OpponentTotalRebounds)
+    ) 
+```
+
+To calculate a z-score in R, the easiest way is to use the `scale` function in base R. To use it, you use `scale(FieldName, center=TRUE, scale=TRUE)`. The center and scale indicate if you want to subtract from the mean and if you want to divide by the standard deviation, respectively. We do.
+
+When we have multiple z-scores, it's pretty standard practice to add them together into a composite score. That's what we're doing at the end here with `TotalZscore`. Note: We have to invert OppZscore and OppRebZScore by multiplying it by a negative 1 because the lower someone's opponent number is, the better. 
+
+```{r}
+teamzscore <- teamtotals %>% 
+  mutate(
+    FGzscore = as.numeric(scale(FGAvg, center = TRUE, scale = TRUE)),
+    RebZscore = as.numeric(scale(ReboundAvg, center = TRUE, scale = TRUE)),
+    OppZscore = as.numeric(scale(OppFGAvg, center = TRUE, scale = TRUE)) * -1,
+    OppRebZScore = as.numeric(scale(OffRebAvg, center = TRUE, scale = TRUE)) * -1,
+    TotalZscore = FGzscore + RebZscore + OppZscore + OppRebZScore
+  )  
+```
+
+So now we have a dataframe called `teamzscore` that has 353 basketball teams with Z scores. What does it look like? 
+
+```{r}
+head(teamzscore)
+```
+
+A way to read this -- a team at zero is precisely average. The larger the positive number, the more exceptional they are. The larger the negative number, the more truly terrible they are. 
+
+So who are the best teams in the country? 
+
+```{r}
+teamzscore %>% arrange(desc(TotalZscore))
+```
+
+Don't sleep on the Anteaters! Would have been a tough out at the tournament that never happened.
+
+But closer to home, how is Nebraska doing.
+
+```{r}
+teamzscore %>% 
+  filter(Conference == "Big Ten") %>% 
+  arrange(desc(TotalZscore)) %>%
+  select(Team, TotalZscore)
+```
+
+So, as we can see, with our composite Z Score, Nebraska is ... not good. Not good at all. 
+
+## Writing about z-scores
+
+The great thing about z-scores is that they make it very easy for you, the sports analyst, to create your own measures of who is better than who. The downside: Only a small handful of sports fans know what the hell a z-score is. 
+
+As such, you should try as hard as you can to avoid writing about them. 
+
+If the word z-score appears in your story or in a chart, you need to explain what it is. "The ranking uses a statistical measure of the distance from the mean called a z-score" is a good way to go about it. You don't need a full stats textbook definition, just a quick explanation. And keep it simple. 
+
+**Never use z-score in a headline.** Write around it. Away from it. Z-score in a headline is attention repellent. You won't get anyone to look at it. So "Tottenham tops in z-score" bad, "Tottenham tops in the Premiere League" good.
+
+

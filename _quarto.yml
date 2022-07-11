@@ -1,0 +1,60 @@
+project:
+  type: book
+
+book:
+  title: "Sports Data Analysis and Visualization"
+  subtitle: "Code, data and visuals for storytellers"
+  author: "Matt Waite"
+  date: "6/27/2022"
+  chapters:
+    - index.qmd
+    - intro.qmd
+    - data.qmd
+    - aggregates.qmd
+    - mutating.qmd
+    - filtering.qmd
+    - transforming.qmd
+    - significancetests.qmd
+    - correlations.qmd
+    - multipleregression.qmd
+    - residuals.qmd
+    - zscores.qmd
+    - clustering.qmd
+    - simulations.qmd
+    - barcharts.qmd
+    - stackedbars.qmd
+    - circularbarcharts.qmd
+    - wafflecharts.qmd
+    - stepcharts.qmd
+    - dumbbellcharts.qmd
+    - scatterplots.qmd
+    - bubblecharts.qmd
+    - beeswarmplots.qmd
+    - bumpcharts.qmd
+    - tables.qmd
+    - facetwraps.qmd
+    - cowplots.qmd
+    - encirclingpoints.qmd
+    - textcleaning.qmd
+    - headlines.qmd
+    - annotations.qmd
+    - finishingtouches.qmd
+    - rtweet.qmd
+    - rvest.qmd
+    - advancedrvest.qmd
+    - blogging.qmd
+    - checklist.qmd
+    - usingpackages.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: simplex
+  pdf:
+    documentclass: scrreprt
+  epub:
+    cover-image: cover.png
+    
+editor: visual
+

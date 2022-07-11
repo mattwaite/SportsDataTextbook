@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-0.9.626">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Sports Data Analysis and Visualization - 33&nbsp; Rtweet and Text Analysis</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./rvest.html" rel="next">
+<link href="./finishingtouches.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Rtweet and Text Analysis</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Sports Data Analysis and Visualization</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Throwing cold water on hot takes</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The very basics</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data, structures and types</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./aggregates.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Aggregates</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./mutating.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Mutating data</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./filtering.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Filters and selections</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./transforming.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Transforming data</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./significancetests.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Significance tests</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./correlations.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Correlations and regression</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./multipleregression.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Multiple regression</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./residuals.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Residuals</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./zscores.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Z-scores</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./clustering.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Clustering</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./simulations.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Simulations</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./barcharts.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Intro to ggplot with bar charts</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./stackedbars.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Stacked bar charts</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./circularbarcharts.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Circular bar charts</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./wafflecharts.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Waffle charts</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./stepcharts.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Step charts</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./dumbbellcharts.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Dumbbell and lollipop charts</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./scatterplots.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Scatterplots</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./bubblecharts.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Bubble charts</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./beeswarmplots.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Beeswarm plots</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./bumpcharts.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Bump charts</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tables.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Tables</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./facetwraps.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Facet wraps</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cowplots.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Arranging multiple plots together</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./encirclingpoints.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Encircling points on a scatterplot</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./textcleaning.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Text cleaning</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./headlines.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Headlines</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./annotations.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Annotations</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./finishingtouches.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Finishing touches</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./rtweet.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Rtweet and Text Analysis</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./rvest.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Intro to rvest</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./advancedrvest.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Advanced rvest</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./blogging.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Building your own blog with blogdown</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./checklist.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Project Checklist</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./usingpackages.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Using packages to get data</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#prerequisites" id="toc-prerequisites" class="nav-link active" data-scroll-target="#prerequisites"> <span class="header-section-number">33.1</span> Prerequisites</a>
+  <ul class="collapse">
+  <li><a href="#tools-for-text-analysis" id="toc-tools-for-text-analysis" class="nav-link" data-scroll-target="#tools-for-text-analysis"> <span class="header-section-number">33.1.1</span> Tools for text analysis</a></li>
+  <li><a href="#working-with-string-data" id="toc-working-with-string-data" class="nav-link" data-scroll-target="#working-with-string-data"> <span class="header-section-number">33.1.2</span> Working with string data</a></li>
+  </ul></li>
+  <li><a href="#verifying-your-account-to-access-twitter-data" id="toc-verifying-your-account-to-access-twitter-data" class="nav-link" data-scroll-target="#verifying-your-account-to-access-twitter-data"> <span class="header-section-number">33.2</span> Verifying your account to access Twitter data</a></li>
+  <li><a href="#the-data-used-here" id="toc-the-data-used-here" class="nav-link" data-scroll-target="#the-data-used-here"> <span class="header-section-number">33.3</span> The data used here</a></li>
+  <li><a href="#data-exploration" id="toc-data-exploration" class="nav-link" data-scroll-target="#data-exploration"> <span class="header-section-number">33.4</span> Data Exploration</a></li>
+  <li><a href="#cleaning-data-for-analysis" id="toc-cleaning-data-for-analysis" class="nav-link" data-scroll-target="#cleaning-data-for-analysis"> <span class="header-section-number">33.5</span> Cleaning data for analysis</a>
+  <ul class="collapse">
+  <li><a href="#fixing-the-date-and-focusing-only-on-game-tweets" id="toc-fixing-the-date-and-focusing-only-on-game-tweets" class="nav-link" data-scroll-target="#fixing-the-date-and-focusing-only-on-game-tweets"> <span class="header-section-number">33.5.1</span> Fixing the date and focusing only on game tweets</a></li>
+  </ul></li>
+  <li><a href="#number-of-tweets-throughout-the-game" id="toc-number-of-tweets-throughout-the-game" class="nav-link" data-scroll-target="#number-of-tweets-throughout-the-game"> <span class="header-section-number">33.6</span> Number of tweets throughout the game</a></li>
+  <li><a href="#tidying-the-text-data-for-analysis-applying-the-sentiment-scores" id="toc-tidying-the-text-data-for-analysis-applying-the-sentiment-scores" class="nav-link" data-scroll-target="#tidying-the-text-data-for-analysis-applying-the-sentiment-scores"> <span class="header-section-number">33.7</span> Tidying the text data for analysis, applying the sentiment scores</a>
+  <ul class="collapse">
+  <li><a href="#example-2---nebraskas-loss-to-purdue-what-were-fans-sentiments-towards-this-loss" id="toc-example-2---nebraskas-loss-to-purdue-what-were-fans-sentiments-towards-this-loss" class="nav-link" data-scroll-target="#example-2---nebraskas-loss-to-purdue-what-were-fans-sentiments-towards-this-loss"> <span class="header-section-number">33.7.1</span> Example 2 - Nebraska’s loss to Purdue, what were fan’s sentiments towards this loss?</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Rtweet and Text Analysis</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<p><strong>By Collin K. Berke, Ph.D.</strong></p>
+<p>One of the best rivalries in college volleyball was played on Saturday, November 2, 2019. <a href="https://journalstar.com/sports/huskers/volleyball/john-cook-on-the-radio-nebraska-penn-state-match-will/article_c1d5c426-e136-5ef2-b589-510a0f17da82.html">The seventh-ranked Penn State Nittany Lions (16-3) took on the eigth-ranked Nebraska Cornhuskers (16-3)</a>. This match featured two of the best middle blockers in the country, Nebraska’s Lauren Stivrins and Penn State’s Kaitlyn Hord. Stivrins was ranked No.&nbsp;1 in Big Ten hitting percentage, a .466 before the match up. Hord, close behind, had a .423 hitting percentage and was ranked towards the top as one of the league’s top blockers.</p>
+<p>Alongside being a competition between premier players, this match was set to be a battle between two of the winningest coaches in NCAA Women’s Volleyball history. Russ Rose, head coach of the Nittany Lions, came into the match with a 1289-209 (.860) record, 17 Big Ten Conference Championships, and 7 NCAA National Championships. For the Nebraska Cornhuskers’ head coach, John Cook came into the match with a 721-148 (.830) record, 9 Big 12 Conference Championships, 4 Big Ten Conference Championships, and 5 NCAA National Championships. Check out this article <a href="https://www.ncaa.com/news/volleyball-women/article/2019-10-29/no-7-penn-state-vs-no-8-nebraska-volleyball-preview">here</a> to get a better understanding of the significance of this game and rivalry.</p>
+<p>Being a contest between two storied programs, premier players, and two of the most winningest coaches in NCAA volleyball history, this match was poised to be one of the premier Big Ten matches of the 2019 season. If history was to serve as a guide, this match would easily go into five exciting, nail-biting sets.</p>
+<p>To no surprise–it did. Nebraska came out victorious, 3 sets to 2, winning the fifth set 15 - 13. Although we have commentators, analysts, and reporters to tell us the story of the game, wouldn’t it be interesting to tell the story from the fan’s perspective? Can what they say allow us to take a pulse of how the fan base feels during the game? We can answer this question using Twitter tweet data, which we will access with the <a href="https://rtweet.info/"><code>rtweet</code></a> package.</p>
+<p><strong>Question - How do people feel during a game? Positive? Negative? Neutral?</strong></p>
+<p>This chapter will teach you how to extract, analyze, and visualize <a href="www.twitter.com">Twitter</a> text data to tell a story about peoples sentiments toward any sport team, player, or event. Although Twitter is conventionally thought of as a social media platform, at a general level, it can be thought of as a corpus of textual data, which is generated by millions of users, talking about a wide array of topics over time.</p>
+<p>During this chapter, we will access text data held within the body of tweets, which we will extract and import into R through the use of an API (application programming interface). This can seem like a pretty technical term, but all it really is is a portal to which data can be shared between computers and humans. NPR has an <a href="https://digitalservices.npr.org/post/api-101-what-api">API 101 post</a> on their site, which you can read to get a rough idea of what an API is and how they are used.</p>
+<p>In fact, many news organizations provide APIs for people to access and use their data. For example, many news services like <a href="https://developer.nytimes.com/">The New York Times</a>, <a href="https://www.npr.org/api/index">NPR</a>, <a href="https://developer.ap.org/">The Associated Press</a> and social media platforms like <a href="https://developers.facebook.com/docs/apis-and-sdks/">Facebook</a> have APIs that can be used to access content or varying types of data. Many of these just require you to: a). have a developer account; b) have the proper API keys; and c). use their API in accordance with their terms of service. Every API you come across should have documentation outlining its use.</p>
+<p>Above was a pretty hand-wavy explanation of APIs. Indeed, APIs have many different uses beyond just extracting data, but such a discussion is beyond the scope of this chapter. Nevertheless, APIs can be a powerful, useful tool to access data not normally available on web pages or other statistical reporting services.</p>
+<section id="prerequisites" class="level2" data-number="33.1">
+<h2 data-number="33.1" class="anchored" data-anchor-id="prerequisites"><span class="header-section-number">33.1</span> Prerequisites</h2>
+<p>You will need to have a Twitter account to access and extract data. If needed, you can sign up for an account <a href="https://twitter.com/i/flow/signup">here</a>.</p>
+<section id="tools-for-text-analysis" class="level3" data-number="33.1.1">
+<h3 data-number="33.1.1" class="anchored" data-anchor-id="tools-for-text-analysis"><span class="header-section-number">33.1.1</span> Tools for text analysis</h3>
+<p>This chapter will also require you to load and acquaint yourself with functions in four packages, <code>rtweet</code>, <code>lubridate</code>, <code>stringr</code>, and <code>tidytext</code>. You may have used some of functions in other portions of this class. Others may be new to you.</p>
+<ul>
+<li><p><a href="https://rtweet.info/index.html"><code>rtweet</code></a> is a R package used to access Twitter data via the Twitter API.</p></li>
+<li><p><a href="https://lubridate.tidyverse.org/"><code>lubridate</code></a> is a package that makes working with dates and times a bit easier.</p></li>
+<li><p><a href="https://stringr.tidyverse.org/"><code>stringr</code></a> is a package that provides several functions to make working with string data a little easier.</p></li>
+<li><p><a href="https://juliasilge.github.io/tidytext/"><code>tidytext</code></a> is a package used to tidy, analyze, and visualize textual analyses. We will use this package to calculate tweet sentiments (e.g., positive and negative feelings).</p></li>
+</ul>
+<p>This chapter will also use other packages you have gained familiarity with throughout the class: <code>dplyr</code> and <code>ggplot2</code>. To install these packages and load them for use in our analysis session, run the following code:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"rtweet"</span>) <span class="co"># installs the rtweet package</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"tidytext"</span>) <span class="co"># installs the tidytext package</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>) <span class="co"># A collection of packages, includes the stringr packages</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"lubridate"</span>) <span class="co"># Provides functions to make working with dates/times easier</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the packages to be used in your analysis session</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rtweet)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidytext)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrepel)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="working-with-string-data" class="level3" data-number="33.1.2">
+<h3 data-number="33.1.2" class="anchored" data-anchor-id="working-with-string-data"><span class="header-section-number">33.1.2</span> Working with string data</h3>
+<p>String data is just basically letters, words, symbols, and even emojis. Take for example the following tweet:</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="images/volleyballTweet.png" class="img-fluid" width="271"></p>
+</div>
+</div>
+<p>Everything contained in the message portion of the tweet is string data, even the emojis. When it comes to emojis, most have a special textual code that is rendered by a browser or device that gets displayed as an image. For example, the ear of corn emoji is actually written as <code>:corn:</code>, but it gets rendered as an image when we view the tweet on our computers/devices. We can extract, analyze, and visualize this string data to tell a wide range of stories from users’ tweets. Our goal being to show sentiment over the length of a Husker volleyball Match and football game.</p>
+</section>
+</section>
+<section id="verifying-your-account-to-access-twitter-data" class="level2" data-number="33.2">
+<h2 data-number="33.2" class="anchored" data-anchor-id="verifying-your-account-to-access-twitter-data"><span class="header-section-number">33.2</span> Verifying your account to access Twitter data</h2>
+<p>Before you can access Twitter data, you will need to verify your account. The <code>rtweet</code> package makes this really easy to do. You will first need to run one of the package’s functions for it to walk you through the authentication process. To do this, let’s just search for the most recent 8000 (non-retweeted) tweets containing the <strong>#huskers</strong> and <strong>#GBR</strong> hashtags.</p>
+<p>Before you run the following code chunk, though, be aware a few things will take place. First, a browser window will open up asking you to verify that <code>rtweet</code> is allowed to access Twitter data via the API on behalf of your account. Accept this request and enter your credentials if you are asked to. Once you do this, you should get a message in your browser stating you have successfully authenticated the <code>rtweet</code> package. The data will then begin to download. The amount of time needed to import this data will depend on how many tweets the hashtag(s) are associated with. More tweets generally means longer import times.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>huskers <span class="ot">&lt;-</span> <span class="fu">search_tweets</span>(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"#huskers"</span>, <span class="at">n =</span> <span class="dv">8000</span>, <span class="at">include_rts =</span> <span class="cn">FALSE</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>gbr <span class="ot">&lt;-</span> <span class="fu">search_tweets</span>(</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"#GBR"</span>, <span class="at">n =</span> <span class="dv">8000</span>, <span class="at">include_rts =</span> <span class="cn">FALSE</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Important Note</strong>: Depending on when you run the above code chunk, the API will return different data then the data used for the examples later in this chapter. This is due to the query rate cap Twitter places on it’s API. Twitter’s API caps queries to 18,000 of the most recent tweets during the past couple of days. This cap resets every 15 minutes. The <code>rtweet</code> package does has functionality to pull data once your query limit resets. However, if you’re looking to pull tweets for a very popular event (e.g., The Super Bowl), you may want to consider other options to extract this type of data. This is also important to understand because if you are looking to pull tweets for a specific event, you will need to make sure you are pulling this data within a reasonable time during or after the event. If you don’t, these rate limits might not allow you access the data you need to do your analysis.</p>
+<p>The data we will use later for the examples in the chapter can be found <a href="https://unl.box.com/s/x4jjifc394gxfvsvbwb3csez2ne4l4rb">here</a> and <a href="https://unl.box.com/s/s4ej8khwi9ah9qvqpi2jviqomfocie3n">here</a>. The first data set are tweets that use the #huskers hashtag. The second has data of tweets that use the #gbr hashtag. You will need to download both data sets, put them in the right directory, and import both for the below examples to work correctly. The code to import this data will look something like this:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>huskerTweets <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/huskerTweets.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 7974 Columns: 90
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr  (49): user_id, status_id, screen_name, text, source, reply_to_status_id...
+dbl  (13): display_text_width, favorite_count, retweet_count, quoted_favorit...
+lgl  (25): is_quote, is_retweet, quote_count, reply_count, symbols, ext_medi...
+dttm  (3): created_at, quoted_created_at, account_created_at
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>gbrTweets <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/gbrTweets.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: One or more parsing issues, see `problems()` for details</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 5678 Columns: 90
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr  (49): user_id, status_id, screen_name, text, source, reply_to_status_id...
+dbl  (13): display_text_width, favorite_count, retweet_count, quoted_favorit...
+lgl  (25): is_quote, is_retweet, quote_count, reply_count, symbols, ext_medi...
+dttm  (3): created_at, quoted_created_at, account_created_at
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+</div>
+<p>This brings up a good point about saving any data you import from Twitter’s API. <strong>Always save your data.</strong> Remember those rate limits? If you don’t save your data and too many days pass, you will not be able to access that data again. To do this, you can use the <code>write_as_csv()</code> function from the <code>rtweet</code> package to save a <code>.csv</code> file of your data. The code to do this will look something like this:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_as_csv</span>(huskerTweets, <span class="st">"data/huskerTweets.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Be aware that this function will overwrite data.</strong> If you make changes to your <code>huskerTweets</code> object and then run the <code>write_as_csv()</code> function again, it will overwrite your saved file with the modifications you made to your object. The lesson then is to always save an extra copy of your data in a separate directory, just in case you do accidentally make a mistake in overwriting your data.</p>
+</section>
+<section id="the-data-used-here" class="level2" data-number="33.3">
+<h2 data-number="33.3" class="anchored" data-anchor-id="the-data-used-here"><span class="header-section-number">33.3</span> The data used here</h2>
+<p>To provide a little context, I pulled the data in this chapter on Sunday, November 3, 2019. This was the day after Nebraska Football lost to Purdue, and Nebraska Volleyball won against Penn State. You can follow the steps above to download this data for the following examples.</p>
+<p>To make it easier to work with, I am going to combine these two data sets into one using the <code>bind_rows()</code> function from <code>dplyr</code>. There is a slight problem though, some people may have had a tweet that contained both the <strong>#huskers</strong> and <strong>#GBR</strong> hashtags in their tweet. So if we combine these two data sets, there might be duplicate data. To dedupe the data, we can apply a <code>distinct(text, .keep_all = TRUE)</code> to remove any duplicates. The <code>.keep_all = TRUE</code> argument just tells R to keep all columns in the data frame after our data has been deduped.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>tweet_data <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(huskerTweets, gbrTweets) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(text, <span class="at">.keep_all =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="data-exploration" class="level2" data-number="33.4">
+<h2 data-number="33.4" class="anchored" data-anchor-id="data-exploration"><span class="header-section-number">33.4</span> Data Exploration</h2>
+<p>Let’s explore the data a bit. Run a <code>glimpse(tweet_data)</code> to get a view of what data was returned from twitter. My query on November 3rd, 2019 returned 11,523 non-retweeted tweets from 3,917 accounts using the <code>#huskers</code> and/or the <code>#GBR</code> hashtag within the tweet’s body (again if you ran the code above, your data will be different) .</p>
+<p>It’s important to remember these tweets can come from accounts that are people, organizations, and even bots. So when drawing conclusions from this data, make sure to keep in mind that these tweets may not represent the sentiment of just one person. Additionally, it is important to remember that not all fans of a sports team are on or use Twitter, so it surely is not a valid representation of all fan sentiment. Indeed, you could also have fans of other teams using your hashtags.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(tweet_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 11,523
+Columns: 90
+$ user_id                 &lt;chr&gt; "x17636179", "x17636179", "x17636179", "x15629…
+$ status_id               &lt;chr&gt; "x1191100304940396544", "x1190852650905944065"…
+$ created_at              &lt;dttm&gt; 2019-11-03 21:10:16, 2019-11-03 04:46:11, 201…
+$ screen_name             &lt;chr&gt; "SeanKeeler", "SeanKeeler", "SeanKeeler", "Hus…
+$ text                    &lt;chr&gt; "ICYMI, #CSURams fans, a recap of @denverpost …
+$ source                  &lt;chr&gt; "Twitter Web App", "Twitter for iPhone", "Twit…
+$ display_text_width      &lt;dbl&gt; 269, 188, 182, 122, 135, 189, 172, 135, 94, 11…
+$ reply_to_status_id      &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ reply_to_user_id        &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ reply_to_screen_name    &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ is_quote                &lt;lgl&gt; FALSE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE…
+$ is_retweet              &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALS…
+$ favorite_count          &lt;dbl&gt; 0, 0, 1, 116, 19, 2, 40, 23, 149, 5, 31, 15, 4…
+$ retweet_count           &lt;dbl&gt; 0, 0, 0, 6, 1, 0, 1, 2, 5, 1, 3, 1, 0, 0, 0, 0…
+$ quote_count             &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ reply_count             &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ hashtags                &lt;chr&gt; "CSURams Huskers ProudToBe AtThePeak CSU", "Hu…
+$ symbols                 &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ urls_url                &lt;chr&gt; "tinyurl.com/y2b3kog9 tinyurl.com/yy7ntps4", "…
+$ urls_t.co               &lt;chr&gt; "https://t.co/1FlAnRRgEq https://t.co/t8j1LJe8…
+$ urls_expanded_url       &lt;chr&gt; "https://tinyurl.com/y2b3kog9 https://tinyurl.…
+$ media_url               &lt;chr&gt; NA, NA, NA, "http://pbs.twimg.com/ext_tw_video…
+$ media_t.co              &lt;chr&gt; NA, NA, NA, "https://t.co/FSCP827hg0", "https:…
+$ media_expanded_url      &lt;chr&gt; NA, NA, NA, "https://twitter.com/HuskerSports/…
+$ media_type              &lt;chr&gt; NA, NA, NA, "photo", "photo", "photo", "photo"…
+$ ext_media_url           &lt;chr&gt; NA, NA, NA, "http://pbs.twimg.com/ext_tw_video…
+$ ext_media_t.co          &lt;chr&gt; NA, NA, NA, "https://t.co/FSCP827hg0", "https:…
+$ ext_media_expanded_url  &lt;chr&gt; NA, NA, NA, "https://twitter.com/HuskerSports/…
+$ ext_media_type          &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ mentions_user_id        &lt;chr&gt; "x8216772", "x8216772", "x24725032", "x1210226…
+$ mentions_screen_name    &lt;chr&gt; "denverpost", "denverpost", "DPostSports", "Ha…
+$ lang                    &lt;chr&gt; "en", "en", "en", "en", "en", "en", "en", "en"…
+$ quoted_status_id        &lt;chr&gt; NA, "x1190803840213209088", NA, NA, NA, NA, NA…
+$ quoted_text             &lt;chr&gt; NA, "From Nebraska to Fort Collins, how CSU Ra…
+$ quoted_created_at       &lt;dttm&gt; NA, 2019-11-03 01:32:14, NA, NA, NA, NA, NA, …
+$ quoted_source           &lt;chr&gt; NA, "TweetDeck", NA, NA, NA, NA, NA, NA, NA, N…
+$ quoted_favorite_count   &lt;dbl&gt; NA, 5, NA, NA, NA, NA, NA, NA, NA, NA, 194, NA…
+$ quoted_retweet_count    &lt;dbl&gt; NA, 1, NA, NA, NA, NA, NA, NA, NA, NA, 16, NA,…
+$ quoted_user_id          &lt;chr&gt; NA, "x24725032", NA, NA, NA, NA, NA, NA, NA, N…
+$ quoted_screen_name      &lt;chr&gt; NA, "DPostSports", NA, NA, NA, NA, NA, NA, NA,…
+$ quoted_name             &lt;chr&gt; NA, "Denver Post Sports", NA, NA, NA, NA, NA, …
+$ quoted_followers_count  &lt;dbl&gt; NA, 34841, NA, NA, NA, NA, NA, NA, NA, NA, 109…
+$ quoted_friends_count    &lt;dbl&gt; NA, 395, NA, NA, NA, NA, NA, NA, NA, NA, 601, …
+$ quoted_statuses_count   &lt;dbl&gt; NA, 113697, NA, NA, NA, NA, NA, NA, NA, NA, 19…
+$ quoted_location         &lt;chr&gt; NA, "Denver, Colorado", NA, NA, NA, NA, NA, NA…
+$ quoted_description      &lt;chr&gt; NA, "Sports news &amp; analysis from @denverpost o…
+$ quoted_verified         &lt;lgl&gt; NA, TRUE, NA, NA, NA, NA, NA, NA, NA, NA, FALS…
+$ retweet_status_id       &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ retweet_text            &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ retweet_created_at      &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ retweet_source          &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ retweet_favorite_count  &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ retweet_retweet_count   &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ retweet_user_id         &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ retweet_screen_name     &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ retweet_name            &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ retweet_followers_count &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ retweet_friends_count   &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ retweet_statuses_count  &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ retweet_location        &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ retweet_description     &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ retweet_verified        &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ place_url               &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ place_name              &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ place_full_name         &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ place_type              &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ country                 &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ country_code            &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ geo_coords              &lt;chr&gt; "NA NA", "NA NA", "NA NA", "NA NA", "NA NA", "…
+$ coords_coords           &lt;chr&gt; "NA NA", "NA NA", "NA NA", "NA NA", "NA NA", "…
+$ bbox_coords             &lt;chr&gt; "NA NA NA NA NA NA NA NA", "NA NA NA NA NA NA …
+$ status_url              &lt;chr&gt; "https://twitter.com/SeanKeeler/status/1191100…
+$ name                    &lt;chr&gt; "Sean Keeler", "Sean Keeler", "Sean Keeler", "…
+$ location                &lt;chr&gt; "Denver, CO", "Denver, CO", "Denver, CO", "Neb…
+$ description             &lt;chr&gt; "@DenverPost staffer, dad, husband, drummer, d…
+$ url                     &lt;chr&gt; "https://t.co/z0eFbv9eaz", "https://t.co/z0eFb…
+$ protected               &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALS…
+$ followers_count         &lt;dbl&gt; 5245, 5245, 5245, 30451, 30451, 30451, 30451, …
+$ friends_count           &lt;dbl&gt; 1619, 1619, 1619, 701, 701, 701, 701, 701, 701…
+$ listed_count            &lt;dbl&gt; 296, 296, 296, 247, 247, 247, 247, 247, 247, 2…
+$ statuses_count          &lt;dbl&gt; 28124, 28124, 28124, 12801, 12801, 12801, 1280…
+$ favourites_count        &lt;dbl&gt; 4498, 4498, 4498, 6033, 6033, 6033, 6033, 6033…
+$ account_created_at      &lt;dttm&gt; 2008-11-25 23:53:13, 2008-11-25 23:53:13, 200…
+$ verified                &lt;lgl&gt; FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, TRUE, T…
+$ profile_url             &lt;chr&gt; "https://t.co/z0eFbv9eaz", "https://t.co/z0eFb…
+$ profile_expanded_url    &lt;chr&gt; "http://www.seankeeler.tumblr.com", "http://ww…
+$ account_lang            &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ profile_banner_url      &lt;chr&gt; "https://pbs.twimg.com/profile_banners/1763617…
+$ profile_background_url  &lt;chr&gt; "http://abs.twimg.com/images/themes/theme10/bg…
+$ profile_image_url       &lt;chr&gt; "http://pbs.twimg.com/profile_images/118130627…</code></pre>
+</div>
+</div>
+<p>As you can see, <code>glimpse()</code> returns a lot of columns that are not really relevant to our analysis. Let’s apply a <code>select()</code> function to only retain the data relevant to our analysis, .</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>tweet_data <span class="ot">&lt;-</span> tweet_data <span class="sc">%&gt;%</span> </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(user_id, status_id, created_at, screen_name, text, display_text_width,</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>         favorite_count, retweet_count, hashtags, description, followers_count)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="cleaning-data-for-analysis" class="level2" data-number="33.5">
+<h2 data-number="33.5" class="anchored" data-anchor-id="cleaning-data-for-analysis"><span class="header-section-number">33.5</span> Cleaning data for analysis</h2>
+<p>If you examine the data set, you will see this data needs some wrangling. First, we need to fix the <code>created_at</code> variable. Right now it is represented in Greenwich Mean Time (GMT), but we need it to be in Central Standard Time (CST). We do this so we can make sense of when during the game things happened. Second, the data is outside of the time frame we are interested in examining, so we need to filter the data to be windowed during the time of the game. We will filter the data by date and time, examining tweets a little before and after the game.</p>
+<section id="fixing-the-date-and-focusing-only-on-game-tweets" class="level3" data-number="33.5.1">
+<h3 data-number="33.5.1" class="anchored" data-anchor-id="fixing-the-date-and-focusing-only-on-game-tweets"><span class="header-section-number">33.5.1</span> Fixing the date and focusing only on game tweets</h3>
+<p>We will use the <code>with_tz()</code> on our <code>created_at</code> variable within our <code>mutate()</code> function to transform the <code>created_at</code> column into Central Standard Time (CST). We do this by setting the <code>tzone</code> argument to <code>"America/Chicago"</code>. Once out time is adjusted, we need group tweets within a specific bin of time. For this example I have decided to bin tweets to the nearest 5 minute mark. We can do this by using the <code>round_time()</code> function provided to us by the <code>lubridate</code> package.</p>
+<p>Then, since we are only interested in tweets during the game, we can apply a <code>dplyr</code> <code>filter()</code> function to window our data set to tweets being posted around the start and end of the game.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>volleyball_tweets <span class="ot">&lt;-</span> tweet_data <span class="sc">%&gt;%</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">created_at =</span> <span class="fu">with_tz</span>(created_at, <span class="at">tzone =</span> <span class="st">"America/Chicago"</span>),</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">created_at =</span> <span class="fu">round_time</span>(created_at, <span class="st">"5 mins"</span>, <span class="at">tz =</span> <span class="st">"America/Chicago"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(created_at <span class="sc">&gt;=</span> <span class="st">"2019-11-02 18:30:00"</span> <span class="sc">&amp;</span> created_at <span class="sc">&lt;=</span> <span class="st">"2019-11-02 23:30:00"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="number-of-tweets-throughout-the-game" class="level2" data-number="33.6">
+<h2 data-number="33.6" class="anchored" data-anchor-id="number-of-tweets-throughout-the-game"><span class="header-section-number">33.6</span> Number of tweets throughout the game</h2>
+<p>One question we might have pertains to the number of tweets that occur during the course of the match. To do this, all we need to do is <code>group_by()</code> our tweets by our <code>created_at</code> variable, and then use the <code>count()</code> function to count the number of tweets within each five minute bin. We then use <code>ggplot</code> to plot a line chart where <code>created_at</code> is placed on the x-axis and <code>n</code>, number of tweets, is placed on the y-axis.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>start_time <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">time =</span> <span class="fu">as_datetime</span>(<span class="st">"2019-11-02 19:35:00"</span>, <span class="at">tz =</span> <span class="st">"America/Chicago"</span>), <span class="at">label =</span> <span class="st">"Start Time"</span>) </span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>volleyball_time <span class="ot">&lt;-</span> volleyball_tweets <span class="sc">%&gt;%</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(created_at) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>()</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> volleyball_time, <span class="fu">aes</span>(<span class="at">x =</span> created_at, <span class="at">y =</span> n)) <span class="sc">+</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> start_time, <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> <span class="dv">5</span>), <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(<span class="at">data =</span> start_time, <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> <span class="dv">3</span>, <span class="at">label =</span> label), <span class="at">nudge_x =</span> <span class="sc">-</span><span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Number of Tweets"</span>,</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Central Standard Time (CST)"</span>) <span class="sc">+</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.title.x =</span> <span class="fu">element_blank</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="rtweet_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>There you have it. A trend line plotting tweet volume throughout the course of the event. Do you see any areas where the match might have had a significant number of tweets?</p>
+</section>
+<section id="tidying-the-text-data-for-analysis-applying-the-sentiment-scores" class="level2" data-number="33.7">
+<h2 data-number="33.7" class="anchored" data-anchor-id="tidying-the-text-data-for-analysis-applying-the-sentiment-scores"><span class="header-section-number">33.7</span> Tidying the text data for analysis, applying the sentiment scores</h2>
+<p>Okay, that’s cool–but what we really want to know is what are peoples’ sentiments throughout the game? Did they feel positive or negative throughout the event? Were there times that were more positive or negative? To achieve this, we are going to use the <code>tidytext</code> package to tidy up our text data and apply a sentiment score to each word held within each tweet. Let’s break this down step-by-step.</p>
+<p>First, we need to get the dictionary that contains the sentiment scoring for thousands of words used in the English language. <code>afinn &lt;- get_sentiments("afinn")</code> does just that for us. The development of these sentiment dictionaries is beyond this chapter. However, most of these dictionaries are crowd sourced by having people provide self-responses on how positive or negative a word is to them. For now, just understand the <code>affin</code> variable contains many words that have been rated for how positive or negative a word is on a scale that ranges from -5 to 5. -5 being the most negative, and 5 being the most positive. If you want to learn more about this dictionary or others, you can read more about them <a href="https://www.tidytextmining.com/sentiment.html">here</a>.</p>
+<p>Second, now that we have our dictionary imported, we need to clean up our tweets data set so we can apply sentiment scores to each word used within each tweet. There’s one problem, though. Each row in our data set is a complete tweet. For us to apply a sentiment score for each word, each word needs to get its own row. This is where the <code>unnest_tokens()</code> function from the <code>tidytext</code> package comes into play. We use this function to create a data set that will create a new column called word, which will place every word from every tweet in our data set on its own row, which it knows which text data to this because we set the the second argument to the column name that holds our text data. In this case, we give it the <code>text</code> column. Once you run this code, if you look at the <code>volleyball_tweets_tidy</code> object, you should now have a data set where every row has its own word which was done for every tweet. This data frame should now be a super long data frame.</p>
+<p>Lastly, the English language has many words that really don’t mean anything in regards to sentiment. Take for example the word ‘the’. This article really doesn’t represent a positive or negative sentiment. Thus, these types of words need to be taken out of our data set to enhance improve the accuracy of our analysis. To do this, we will apply the <code>anti_join(stop_words)</code> to our <code>dplyr</code> chain. All this does is get rid of the stop words in our data set that really don’t contribute to the sentiment scores we are eventually going to calculate.</p>
+<p>If you get an error on the next bit of code, you’ll likely need to install the textdata package on the console with <code>install.packages("textdata")</code>. Next, if this next block of code hangs, it’s because in the console you’re being asked if you want to download some data. You do indeed want to do that, so type 1 and hit enter.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>afinn <span class="ot">&lt;-</span> <span class="fu">get_sentiments</span>(<span class="st">"afinn"</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>volleyball_tweets_tidy <span class="ot">&lt;-</span> volleyball_tweets <span class="sc">%&gt;%</span> </span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(word, text) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(stop_words) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Joining, by = "word"</code></pre>
+</div>
+</div>
+<section id="fan-sentiment-over-the-game" class="level4" data-number="33.7.0.1">
+<h4 data-number="33.7.0.1" class="anchored" data-anchor-id="fan-sentiment-over-the-game"><span class="header-section-number">33.7.0.1</span> Fan sentiment over the game</h4>
+<p>Now that we have a tidied textual data set, all we need to do is apply our sentiment scores to these words using the <code>inner_join()</code>, then <code>group_by()</code> our <code>created_at</code> variable, and calculate the mean sentiment for each five minute interval. At this point, we will use <code>ggplot</code> to plot sentiment of the tweets over time. We will do this by plotting the <code>created_at</code> variable on the x-axis and the newly calculated <code>sentiment</code> variable on the y-axis. The rest is just adding annotations and styling, which we are already familiar with.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>volleyball_tweets_sentiment <span class="ot">&lt;-</span> volleyball_tweets_tidy <span class="sc">%&gt;%</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(afinn) <span class="sc">%&gt;%</span> </span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(created_at) <span class="sc">%&gt;%</span> </span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">sentiment =</span> <span class="fu">mean</span>(value))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Joining, by = "word"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> volleyball_tweets_sentiment, <span class="fu">aes</span>(<span class="at">x =</span> created_at, <span class="at">y =</span> sentiment)) <span class="sc">+</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as_datetime</span>(<span class="st">"2019-11-02 19:00:00"</span>, <span class="at">tz =</span> <span class="st">"America/Chicago"</span>), <span class="at">y =</span> <span class="dv">3</span>), <span class="at">color =</span> <span class="st">"darkgreen"</span>, <span class="at">label =</span> <span class="st">"Positive Sentiment"</span>, <span class="at">size =</span> <span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as_datetime</span>(<span class="st">"2019-11-02 19:00:00"</span>, <span class="at">tz =</span> <span class="st">"America/Chicago"</span>), <span class="at">y =</span> <span class="sc">-</span><span class="dv">3</span>), <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">label =</span> <span class="st">"Negative Sentiment"</span>, <span class="at">size =</span> <span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"People's Sentiment on Twitter Positive Towards</span><span class="sc">\n</span><span class="st">Husker Volleyball's Win Against Penn State"</span>,</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Sentiment mostly positive throughout the game"</span>,</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Source: #huskers and #GBR Tweets, 2019-11-02 | By Collin K. Berke"</span>,</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Sentiment"</span>,</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Central Standard Time (CST)"</span>) <span class="sc">+</span> </span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="dv">4</span>)) <span class="sc">+</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.title.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>),</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">7</span>)</span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>        )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="rtweet_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>When looking at this trend line, you can see that during the volleyball game, tweets using the #husker and #gbr hashtags had some wide variation in sentiment. Overall it seems that tweets during the volleyball match were mostly positive, where at times it dipped negative. Why might this be the case? Well, unfortunately, even though this was a big game for Husker volleyball, not many people were tweeting during the match (take a look at the number of tweets chart above). So if there was one word used in a tweet that was ranked as very negative in sentiment, it would have easily drove our average sentiment into the negative region quickly.</p>
+<p>Also, we need to consider that this match took place after the Huskers loss to Purdue, which we will examine in the next example. This is important to know because people during the volleyball match may have also been tweeting about how poorly the football game went earlier in the day. Thus, low tweet volume mixed with the potential for tweets referencing something other than the match at hand may have had some influence on the sentiment scores.</p>
+<p>There’s also one last thing to keep in mind when you draw conclusions from this type of text data. Language is complex–it can have multiple meanings, which is highly influenced by context. Take for example the word ‘destroy’, like its use in the following statement: “This team is going to destroy the defense today.” Although we clearly can see this is a positive statement, when a computer applies sentiment scores, the context of the statement is stripped away, and destroy will be scored as negative sentiment. In short, computers are not smart enough to include context when they calculate sentiment, yet. So, keep this limitation in mind when you draw conclusions from your sentiment analyses using text data.</p>
+</section>
+<section id="example-2---nebraskas-loss-to-purdue-what-were-fans-sentiments-towards-this-loss" class="level3" data-number="33.7.1">
+<h3 data-number="33.7.1" class="anchored" data-anchor-id="example-2---nebraskas-loss-to-purdue-what-were-fans-sentiments-towards-this-loss"><span class="header-section-number">33.7.1</span> Example 2 - Nebraska’s loss to Purdue, what were fan’s sentiments towards this loss?</h3>
+<p>The Nebraska Cornhuskers–<a href="https://nebraska.rivals.com/news/nebraska-at-purdue-keys-to-victory-hol-score-predictions">a 3-point favorite going into West Lafayette, IN</a>–squared off with the Purdue Boilermakers on November 2, 2019. Purdue was 2-6 on the season. Nebraska, with a 4-4 record coming off of a 38-31 home loss to Indiana, had many fans hoping Scott Frost could lead his team to a must needed win. <a href="https://journalstar.com/sports/huskers/sipple/steven-m-sipple-frost-s-reaction-to-moos-six-win/article_bcebc067-865e-59a7-948d-c99290201294.html">Especially given the expectation was the Cornhuskers would go 6-6 on the season</a>, and the team still had to play Wisconsin (6-2), Maryland (3-6), and Iowa (6-2) to get to those needed six wins to become bowl eligible. So, how did people particularly take this loss? Let’s use our Twitter data to get an answer.</p>
+<p>Again, we need to fix the time zone with the <code>with_tz()</code> function so the data is represented in Central Standard Time (CST). Then we apply our <code>filter()</code> command to window our data to when the game was taking place.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>football_tweets <span class="ot">&lt;-</span> tweet_data <span class="sc">%&gt;%</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">created_at =</span> <span class="fu">with_tz</span>(created_at, <span class="at">tzone =</span> <span class="st">"America/Chicago"</span>),</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">created_at =</span> <span class="fu">round_time</span>(created_at, <span class="st">"5 mins"</span>, <span class="at">tz =</span> <span class="st">"America/Chicago"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(created_at <span class="sc">&gt;=</span> <span class="st">"2019-11-02 11:00:00"</span> <span class="sc">&amp;</span> created_at <span class="sc">&lt;=</span> <span class="st">"2019-11-02 15:30:00"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now, let’s just get a sense of the number of tweets that occurred at certain points in the game. We again need to do some data wrangling with <code>group_by()</code>, and then we use the <code>count()</code> function to add up all the tweets during each five minute interval. Once the data is wrangled, we can use our <code>ggplot</code> code to visualize tweet volume throughout the game.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>football_time <span class="ot">&lt;-</span> football_tweets <span class="sc">%&gt;%</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(created_at) <span class="sc">%&gt;%</span> </span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>()</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> football_time, <span class="fu">aes</span>(<span class="at">x =</span> created_at, <span class="at">y =</span> n)) <span class="sc">+</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Number of Tweets"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="rtweet_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Looking at this plot, we can see the tweet volume is a lot higher than that of the volleyball match. In fact, it looks like towards the end of the game there was a five minute interval where ~80 or so tweets occurred. Given the outcome of the game, I assume people were not real happy during this spike in activity. Well we have the tools to answer this question.</p>
+<p>As before, let’s pull in our sentiment library with the <code>get_sentiments()</code> function. Then lets tidy up our tweet data using the <code>unnest_tokens()</code> and <code>anti_join(stop_words)</code>. Remember this step just places every word within a tweet on its own row and filters out any words that don’t have any real meaning to the calculation of sentiment (i.e., and, the, a, etc.).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>afinn <span class="ot">&lt;-</span> <span class="fu">get_sentiments</span>(<span class="st">"afinn"</span>)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>football_tweets_tidy <span class="ot">&lt;-</span> football_tweets <span class="sc">%&gt;%</span> </span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(word, text) <span class="sc">%&gt;%</span> </span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(stop_words) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Joining, by = "word"</code></pre>
+</div>
+</div>
+<p>We now have our clean textual data, let’s apply sentiment scores for each word using the <code>inner_join(affin)</code> function, <code>group_by(created_at)</code> to create a group for each five minute interval, and then use <code>summarise()</code> to calculate then mean sentiment for each time period.</p>
+<p>You can then use the <code>ggplot</code> code to plot sentiment over time, introduce annotations to highlight specific aspects within our plot, and then apply styling to the plot to move it closer to publication readiness. Now for the big reveal, how did people take the loss to a 2-6 Purdue? Run the code and find out.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>football_tweets_sentiment <span class="ot">&lt;-</span> football_tweets_tidy <span class="sc">%&gt;%</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(afinn) <span class="sc">%&gt;%</span> </span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(created_at) <span class="sc">%&gt;%</span> </span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">sentiment =</span> <span class="fu">mean</span>(value)) <span class="sc">%&gt;%</span> </span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(sentiment)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Joining, by = "word"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> football_tweets_sentiment, <span class="fu">aes</span>(<span class="at">x =</span> created_at, <span class="at">y =</span> sentiment)) <span class="sc">+</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as_datetime</span>(<span class="st">"2019-11-02 14:30:00"</span>, <span class="at">tz =</span> <span class="st">"America/Chicago"</span>), <span class="at">y =</span> <span class="dv">2</span>), <span class="at">color =</span> <span class="st">"darkgreen"</span>, <span class="at">label =</span> <span class="st">"Positive Sentiment"</span>, <span class="at">size =</span> <span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as_datetime</span>(<span class="st">"2019-11-02 14:30:00"</span>, <span class="at">tz =</span> <span class="st">"America/Chicago"</span>), <span class="at">y =</span> <span class="sc">-</span><span class="dv">2</span>), <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">label =</span> <span class="st">"Negative Sentiment"</span>, <span class="at">size =</span> <span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">2.5</span>, <span class="fl">2.5</span>)) <span class="sc">+</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"People's Sentiment on Twitter Negative</span><span class="sc">\n</span><span class="st">Towards Husker Football's Loss to Purdue"</span>,</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"People were positive at the start and part of the first half,</span><span class="sc">\n</span><span class="st">then negative throughout"</span>,</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Source: #huskers and #GBR Tweets, 2019-11-02 | By Collin K. Berke"</span>,</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Sentiment"</span>,</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Central Standard Time (CST)"</span>) <span class="sc">+</span> </span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.title.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>),</span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">7</span>)</span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="rtweet_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>As you can see, it started out pretty positive. Then, it started to go negative throughout the first half. However, there was a bump, which was around the time D-Lineman, Darrion Daniels almost scored a pick six. Around halftime, we can see a little bit of a bump towards positive sentiment. This was probably most likely due to people cheering on the Huskers to come out strong after the half. As the second half progressed, you can see things turned for the worst again, and sentiment became negative up until the end of the game, most likely because people realized they were going to get another L on the schedule. You can relive all this excitement again by catching the game recap <a href="https://www.youtube.com/watch?v=m0hKH6Zb0vY&amp;feature=onebox">here</a>.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./finishingtouches.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Finishing touches</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./rvest.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Intro to rvest</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>
