@@ -6,6 +6,8 @@ book:
   subtitle: "Code, data and visuals for storytellers"
   author: "Matt Waite"
   date: "6/27/2022"
+  repo-url: https://github.com/mattwaite/SportsDataTextbook
+  downloads: [pdf, epub]
   chapters:
     - index.qmd
     - intro.qmd
@@ -25,6 +27,7 @@ book:
     - stackedbars.qmd
     - circularbarcharts.qmd
     - wafflecharts.qmd
+    - linecharts.qmd
     - stepcharts.qmd
     - dumbbellcharts.qmd
     - scatterplots.qmd
@@ -57,4 +60,7 @@ format:
     cover-image: cover.png
     
 editor: visual
+
+execute:
+  freeze: auto
 

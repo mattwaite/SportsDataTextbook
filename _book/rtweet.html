@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-0.9.626">
+<meta name="generator" content="quarto-1.0.14">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Sports Data Analysis and Visualization - 33&nbsp; Rtweet and Text Analysis</title>
+<title>Sports Data Analysis and Visualization - 34&nbsp; Rtweet and Text Analysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -98,7 +98,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -129,7 +129,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Rtweet and Text Analysis</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Rtweet and Text Analysis</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -143,6 +143,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Sports Data Analysis and Visualization</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/mattwaite/SportsDataTextbook" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+    <a href="" title="Download" id="sidebar-tool-dropdown-0" class="sidebar-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-download"></i></a>
+    <ul class="dropdown-menu" aria-labelledby="sidebar-tool-dropdown-0">
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="./Sports-Data-Analysis-and-Visualization.pdf">
+            <i class="bi bi-bi-file-pdf pe-1"></i>
+          Download PDF
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="./Sports-Data-Analysis-and-Visualization.epub">
+            <i class="bi bi-bi-journal pe-1"></i>
+          Download ePub
+          </a>
+        </li>
+    </ul>
+</div>
     </div>
       </div>
       <div class="mt-2 flex-shrink-0 align-items-center">
@@ -244,102 +262,107 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./stepcharts.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Step charts</span></a>
+  <a href="./linecharts.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Line charts</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./dumbbellcharts.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Dumbbell and lollipop charts</span></a>
+  <a href="./stepcharts.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Step charts</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./scatterplots.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Scatterplots</span></a>
+  <a href="./dumbbellcharts.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Dumbbell and lollipop charts</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./bubblecharts.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Bubble charts</span></a>
+  <a href="./scatterplots.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Scatterplots</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./beeswarmplots.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Beeswarm plots</span></a>
+  <a href="./bubblecharts.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Bubble charts</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./bumpcharts.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Bump charts</span></a>
+  <a href="./beeswarmplots.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Beeswarm plots</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./tables.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Tables</span></a>
+  <a href="./bumpcharts.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Bump charts</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./facetwraps.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Facet wraps</span></a>
+  <a href="./tables.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Tables</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./cowplots.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Arranging multiple plots together</span></a>
+  <a href="./facetwraps.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Facet wraps</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./encirclingpoints.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Encircling points on a scatterplot</span></a>
+  <a href="./cowplots.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Arranging multiple plots together</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./textcleaning.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Text cleaning</span></a>
+  <a href="./encirclingpoints.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Encircling points on a scatterplot</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./headlines.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Headlines</span></a>
+  <a href="./textcleaning.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Text cleaning</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./annotations.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Annotations</span></a>
+  <a href="./headlines.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Headlines</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./finishingtouches.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Finishing touches</span></a>
+  <a href="./annotations.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Annotations</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./rtweet.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Rtweet and Text Analysis</span></a>
+  <a href="./finishingtouches.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Finishing touches</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./rvest.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Intro to rvest</span></a>
+  <a href="./rtweet.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Rtweet and Text Analysis</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./advancedrvest.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Advanced rvest</span></a>
+  <a href="./rvest.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Intro to rvest</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./blogging.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Building your own blog with blogdown</span></a>
+  <a href="./advancedrvest.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Advanced rvest</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./checklist.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Project Checklist</span></a>
+  <a href="./blogging.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Building your own blog with blogdown</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./usingpackages.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Using packages to get data</span></a>
+  <a href="./checklist.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Project Checklist</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./usingpackages.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">Using packages to get data</span></a>
   </div>
 </li>
     </ul>
@@ -351,22 +374,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#prerequisites" id="toc-prerequisites" class="nav-link active" data-scroll-target="#prerequisites"> <span class="header-section-number">33.1</span> Prerequisites</a>
+  <li><a href="#prerequisites" id="toc-prerequisites" class="nav-link active" data-scroll-target="#prerequisites"> <span class="header-section-number">34.1</span> Prerequisites</a>
   <ul class="collapse">
-  <li><a href="#tools-for-text-analysis" id="toc-tools-for-text-analysis" class="nav-link" data-scroll-target="#tools-for-text-analysis"> <span class="header-section-number">33.1.1</span> Tools for text analysis</a></li>
-  <li><a href="#working-with-string-data" id="toc-working-with-string-data" class="nav-link" data-scroll-target="#working-with-string-data"> <span class="header-section-number">33.1.2</span> Working with string data</a></li>
+  <li><a href="#tools-for-text-analysis" id="toc-tools-for-text-analysis" class="nav-link" data-scroll-target="#tools-for-text-analysis"> <span class="header-section-number">34.1.1</span> Tools for text analysis</a></li>
+  <li><a href="#working-with-string-data" id="toc-working-with-string-data" class="nav-link" data-scroll-target="#working-with-string-data"> <span class="header-section-number">34.1.2</span> Working with string data</a></li>
   </ul></li>
-  <li><a href="#verifying-your-account-to-access-twitter-data" id="toc-verifying-your-account-to-access-twitter-data" class="nav-link" data-scroll-target="#verifying-your-account-to-access-twitter-data"> <span class="header-section-number">33.2</span> Verifying your account to access Twitter data</a></li>
-  <li><a href="#the-data-used-here" id="toc-the-data-used-here" class="nav-link" data-scroll-target="#the-data-used-here"> <span class="header-section-number">33.3</span> The data used here</a></li>
-  <li><a href="#data-exploration" id="toc-data-exploration" class="nav-link" data-scroll-target="#data-exploration"> <span class="header-section-number">33.4</span> Data Exploration</a></li>
-  <li><a href="#cleaning-data-for-analysis" id="toc-cleaning-data-for-analysis" class="nav-link" data-scroll-target="#cleaning-data-for-analysis"> <span class="header-section-number">33.5</span> Cleaning data for analysis</a>
+  <li><a href="#verifying-your-account-to-access-twitter-data" id="toc-verifying-your-account-to-access-twitter-data" class="nav-link" data-scroll-target="#verifying-your-account-to-access-twitter-data"> <span class="header-section-number">34.2</span> Verifying your account to access Twitter data</a></li>
+  <li><a href="#the-data-used-here" id="toc-the-data-used-here" class="nav-link" data-scroll-target="#the-data-used-here"> <span class="header-section-number">34.3</span> The data used here</a></li>
+  <li><a href="#data-exploration" id="toc-data-exploration" class="nav-link" data-scroll-target="#data-exploration"> <span class="header-section-number">34.4</span> Data Exploration</a></li>
+  <li><a href="#cleaning-data-for-analysis" id="toc-cleaning-data-for-analysis" class="nav-link" data-scroll-target="#cleaning-data-for-analysis"> <span class="header-section-number">34.5</span> Cleaning data for analysis</a>
   <ul class="collapse">
-  <li><a href="#fixing-the-date-and-focusing-only-on-game-tweets" id="toc-fixing-the-date-and-focusing-only-on-game-tweets" class="nav-link" data-scroll-target="#fixing-the-date-and-focusing-only-on-game-tweets"> <span class="header-section-number">33.5.1</span> Fixing the date and focusing only on game tweets</a></li>
+  <li><a href="#fixing-the-date-and-focusing-only-on-game-tweets" id="toc-fixing-the-date-and-focusing-only-on-game-tweets" class="nav-link" data-scroll-target="#fixing-the-date-and-focusing-only-on-game-tweets"> <span class="header-section-number">34.5.1</span> Fixing the date and focusing only on game tweets</a></li>
   </ul></li>
-  <li><a href="#number-of-tweets-throughout-the-game" id="toc-number-of-tweets-throughout-the-game" class="nav-link" data-scroll-target="#number-of-tweets-throughout-the-game"> <span class="header-section-number">33.6</span> Number of tweets throughout the game</a></li>
-  <li><a href="#tidying-the-text-data-for-analysis-applying-the-sentiment-scores" id="toc-tidying-the-text-data-for-analysis-applying-the-sentiment-scores" class="nav-link" data-scroll-target="#tidying-the-text-data-for-analysis-applying-the-sentiment-scores"> <span class="header-section-number">33.7</span> Tidying the text data for analysis, applying the sentiment scores</a>
+  <li><a href="#number-of-tweets-throughout-the-game" id="toc-number-of-tweets-throughout-the-game" class="nav-link" data-scroll-target="#number-of-tweets-throughout-the-game"> <span class="header-section-number">34.6</span> Number of tweets throughout the game</a></li>
+  <li><a href="#tidying-the-text-data-for-analysis-applying-the-sentiment-scores" id="toc-tidying-the-text-data-for-analysis-applying-the-sentiment-scores" class="nav-link" data-scroll-target="#tidying-the-text-data-for-analysis-applying-the-sentiment-scores"> <span class="header-section-number">34.7</span> Tidying the text data for analysis, applying the sentiment scores</a>
   <ul class="collapse">
-  <li><a href="#example-2---nebraskas-loss-to-purdue-what-were-fans-sentiments-towards-this-loss" id="toc-example-2---nebraskas-loss-to-purdue-what-were-fans-sentiments-towards-this-loss" class="nav-link" data-scroll-target="#example-2---nebraskas-loss-to-purdue-what-were-fans-sentiments-towards-this-loss"> <span class="header-section-number">33.7.1</span> Example 2 - Nebraska’s loss to Purdue, what were fan’s sentiments towards this loss?</a></li>
+  <li><a href="#example-2---nebraskas-loss-to-purdue-what-were-fans-sentiments-towards-this-loss" id="toc-example-2---nebraskas-loss-to-purdue-what-were-fans-sentiments-towards-this-loss" class="nav-link" data-scroll-target="#example-2---nebraskas-loss-to-purdue-what-were-fans-sentiments-towards-this-loss"> <span class="header-section-number">34.7.1</span> Example 2 - Nebraska’s loss to Purdue, what were fan’s sentiments towards this loss?</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -376,7 +399,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Rtweet and Text Analysis</span></h1>
+<h1 class="title d-none d-lg-block"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Rtweet and Text Analysis</span></h1>
 </div>
 
 
@@ -400,11 +423,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>During this chapter, we will access text data held within the body of tweets, which we will extract and import into R through the use of an API (application programming interface). This can seem like a pretty technical term, but all it really is is a portal to which data can be shared between computers and humans. NPR has an <a href="https://digitalservices.npr.org/post/api-101-what-api">API 101 post</a> on their site, which you can read to get a rough idea of what an API is and how they are used.</p>
 <p>In fact, many news organizations provide APIs for people to access and use their data. For example, many news services like <a href="https://developer.nytimes.com/">The New York Times</a>, <a href="https://www.npr.org/api/index">NPR</a>, <a href="https://developer.ap.org/">The Associated Press</a> and social media platforms like <a href="https://developers.facebook.com/docs/apis-and-sdks/">Facebook</a> have APIs that can be used to access content or varying types of data. Many of these just require you to: a). have a developer account; b) have the proper API keys; and c). use their API in accordance with their terms of service. Every API you come across should have documentation outlining its use.</p>
 <p>Above was a pretty hand-wavy explanation of APIs. Indeed, APIs have many different uses beyond just extracting data, but such a discussion is beyond the scope of this chapter. Nevertheless, APIs can be a powerful, useful tool to access data not normally available on web pages or other statistical reporting services.</p>
-<section id="prerequisites" class="level2" data-number="33.1">
-<h2 data-number="33.1" class="anchored" data-anchor-id="prerequisites"><span class="header-section-number">33.1</span> Prerequisites</h2>
+<section id="prerequisites" class="level2" data-number="34.1">
+<h2 data-number="34.1" class="anchored" data-anchor-id="prerequisites"><span class="header-section-number">34.1</span> Prerequisites</h2>
 <p>You will need to have a Twitter account to access and extract data. If needed, you can sign up for an account <a href="https://twitter.com/i/flow/signup">here</a>.</p>
-<section id="tools-for-text-analysis" class="level3" data-number="33.1.1">
-<h3 data-number="33.1.1" class="anchored" data-anchor-id="tools-for-text-analysis"><span class="header-section-number">33.1.1</span> Tools for text analysis</h3>
+<section id="tools-for-text-analysis" class="level3" data-number="34.1.1">
+<h3 data-number="34.1.1" class="anchored" data-anchor-id="tools-for-text-analysis"><span class="header-section-number">34.1.1</span> Tools for text analysis</h3>
 <p>This chapter will also require you to load and acquaint yourself with functions in four packages, <code>rtweet</code>, <code>lubridate</code>, <code>stringr</code>, and <code>tidytext</code>. You may have used some of functions in other portions of this class. Others may be new to you.</p>
 <ul>
 <li><p><a href="https://rtweet.info/index.html"><code>rtweet</code></a> is a R package used to access Twitter data via the Twitter API.</p></li>
@@ -436,8 +459,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrepel)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="working-with-string-data" class="level3" data-number="33.1.2">
-<h3 data-number="33.1.2" class="anchored" data-anchor-id="working-with-string-data"><span class="header-section-number">33.1.2</span> Working with string data</h3>
+<section id="working-with-string-data" class="level3" data-number="34.1.2">
+<h3 data-number="34.1.2" class="anchored" data-anchor-id="working-with-string-data"><span class="header-section-number">34.1.2</span> Working with string data</h3>
 <p>String data is just basically letters, words, symbols, and even emojis. Take for example the following tweet:</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -447,8 +470,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Everything contained in the message portion of the tweet is string data, even the emojis. When it comes to emojis, most have a special textual code that is rendered by a browser or device that gets displayed as an image. For example, the ear of corn emoji is actually written as <code>:corn:</code>, but it gets rendered as an image when we view the tweet on our computers/devices. We can extract, analyze, and visualize this string data to tell a wide range of stories from users’ tweets. Our goal being to show sentiment over the length of a Husker volleyball Match and football game.</p>
 </section>
 </section>
-<section id="verifying-your-account-to-access-twitter-data" class="level2" data-number="33.2">
-<h2 data-number="33.2" class="anchored" data-anchor-id="verifying-your-account-to-access-twitter-data"><span class="header-section-number">33.2</span> Verifying your account to access Twitter data</h2>
+<section id="verifying-your-account-to-access-twitter-data" class="level2" data-number="34.2">
+<h2 data-number="34.2" class="anchored" data-anchor-id="verifying-your-account-to-access-twitter-data"><span class="header-section-number">34.2</span> Verifying your account to access Twitter data</h2>
 <p>Before you can access Twitter data, you will need to verify your account. The <code>rtweet</code> package makes this really easy to do. You will first need to run one of the package’s functions for it to walk you through the authentication process. To do this, let’s just search for the most recent 8000 (non-retweeted) tweets containing the <strong>#huskers</strong> and <strong>#GBR</strong> hashtags.</p>
 <p>Before you run the following code chunk, though, be aware a few things will take place. First, a browser window will open up asking you to verify that <code>rtweet</code> is allowed to access Twitter data via the API on behalf of your account. Accept this request and enter your credentials if you are asked to. Once you do this, you should get a message in your browser stating you have successfully authenticated the <code>rtweet</code> package. The data will then begin to download. The amount of time needed to import this data will depend on how many tweets the hashtag(s) are associated with. More tweets generally means longer import times.</p>
 <div class="cell">
@@ -499,8 +522,8 @@ dttm  (3): created_at, quoted_created_at, account_created_at
 </div>
 <p><strong>Be aware that this function will overwrite data.</strong> If you make changes to your <code>huskerTweets</code> object and then run the <code>write_as_csv()</code> function again, it will overwrite your saved file with the modifications you made to your object. The lesson then is to always save an extra copy of your data in a separate directory, just in case you do accidentally make a mistake in overwriting your data.</p>
 </section>
-<section id="the-data-used-here" class="level2" data-number="33.3">
-<h2 data-number="33.3" class="anchored" data-anchor-id="the-data-used-here"><span class="header-section-number">33.3</span> The data used here</h2>
+<section id="the-data-used-here" class="level2" data-number="34.3">
+<h2 data-number="34.3" class="anchored" data-anchor-id="the-data-used-here"><span class="header-section-number">34.3</span> The data used here</h2>
 <p>To provide a little context, I pulled the data in this chapter on Sunday, November 3, 2019. This was the day after Nebraska Football lost to Purdue, and Nebraska Volleyball won against Penn State. You can follow the steps above to download this data for the following examples.</p>
 <p>To make it easier to work with, I am going to combine these two data sets into one using the <code>bind_rows()</code> function from <code>dplyr</code>. There is a slight problem though, some people may have had a tweet that contained both the <strong>#huskers</strong> and <strong>#GBR</strong> hashtags in their tweet. So if we combine these two data sets, there might be duplicate data. To dedupe the data, we can apply a <code>distinct(text, .keep_all = TRUE)</code> to remove any duplicates. The <code>.keep_all = TRUE</code> argument just tells R to keep all columns in the data frame after our data has been deduped.</p>
 <div class="cell">
@@ -508,8 +531,8 @@ dttm  (3): created_at, quoted_created_at, account_created_at
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(text, <span class="at">.keep_all =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="data-exploration" class="level2" data-number="33.4">
-<h2 data-number="33.4" class="anchored" data-anchor-id="data-exploration"><span class="header-section-number">33.4</span> Data Exploration</h2>
+<section id="data-exploration" class="level2" data-number="34.4">
+<h2 data-number="34.4" class="anchored" data-anchor-id="data-exploration"><span class="header-section-number">34.4</span> Data Exploration</h2>
 <p>Let’s explore the data a bit. Run a <code>glimpse(tweet_data)</code> to get a view of what data was returned from twitter. My query on November 3rd, 2019 returned 11,523 non-retweeted tweets from 3,917 accounts using the <code>#huskers</code> and/or the <code>#GBR</code> hashtag within the tweet’s body (again if you ran the code above, your data will be different) .</p>
 <p>It’s important to remember these tweets can come from accounts that are people, organizations, and even bots. So when drawing conclusions from this data, make sure to keep in mind that these tweets may not represent the sentiment of just one person. Additionally, it is important to remember that not all fans of a sports team are on or use Twitter, so it surely is not a valid representation of all fan sentiment. Indeed, you could also have fans of other teams using your hashtags.</p>
 <div class="cell">
@@ -616,11 +639,11 @@ $ profile_image_url       &lt;chr&gt; "http://pbs.twimg.com/profile_images/11813
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>         favorite_count, retweet_count, hashtags, description, followers_count)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="cleaning-data-for-analysis" class="level2" data-number="33.5">
-<h2 data-number="33.5" class="anchored" data-anchor-id="cleaning-data-for-analysis"><span class="header-section-number">33.5</span> Cleaning data for analysis</h2>
+<section id="cleaning-data-for-analysis" class="level2" data-number="34.5">
+<h2 data-number="34.5" class="anchored" data-anchor-id="cleaning-data-for-analysis"><span class="header-section-number">34.5</span> Cleaning data for analysis</h2>
 <p>If you examine the data set, you will see this data needs some wrangling. First, we need to fix the <code>created_at</code> variable. Right now it is represented in Greenwich Mean Time (GMT), but we need it to be in Central Standard Time (CST). We do this so we can make sense of when during the game things happened. Second, the data is outside of the time frame we are interested in examining, so we need to filter the data to be windowed during the time of the game. We will filter the data by date and time, examining tweets a little before and after the game.</p>
-<section id="fixing-the-date-and-focusing-only-on-game-tweets" class="level3" data-number="33.5.1">
-<h3 data-number="33.5.1" class="anchored" data-anchor-id="fixing-the-date-and-focusing-only-on-game-tweets"><span class="header-section-number">33.5.1</span> Fixing the date and focusing only on game tweets</h3>
+<section id="fixing-the-date-and-focusing-only-on-game-tweets" class="level3" data-number="34.5.1">
+<h3 data-number="34.5.1" class="anchored" data-anchor-id="fixing-the-date-and-focusing-only-on-game-tweets"><span class="header-section-number">34.5.1</span> Fixing the date and focusing only on game tweets</h3>
 <p>We will use the <code>with_tz()</code> on our <code>created_at</code> variable within our <code>mutate()</code> function to transform the <code>created_at</code> column into Central Standard Time (CST). We do this by setting the <code>tzone</code> argument to <code>"America/Chicago"</code>. Once out time is adjusted, we need group tweets within a specific bin of time. For this example I have decided to bin tweets to the nearest 5 minute mark. We can do this by using the <code>round_time()</code> function provided to us by the <code>lubridate</code> package.</p>
 <p>Then, since we are only interested in tweets during the game, we can apply a <code>dplyr</code> <code>filter()</code> function to window our data set to tweets being posted around the start and end of the game.</p>
 <div class="cell">
@@ -631,8 +654,8 @@ $ profile_image_url       &lt;chr&gt; "http://pbs.twimg.com/profile_images/11813
 </div>
 </section>
 </section>
-<section id="number-of-tweets-throughout-the-game" class="level2" data-number="33.6">
-<h2 data-number="33.6" class="anchored" data-anchor-id="number-of-tweets-throughout-the-game"><span class="header-section-number">33.6</span> Number of tweets throughout the game</h2>
+<section id="number-of-tweets-throughout-the-game" class="level2" data-number="34.6">
+<h2 data-number="34.6" class="anchored" data-anchor-id="number-of-tweets-throughout-the-game"><span class="header-section-number">34.6</span> Number of tweets throughout the game</h2>
 <p>One question we might have pertains to the number of tweets that occur during the course of the match. To do this, all we need to do is <code>group_by()</code> our tweets by our <code>created_at</code> variable, and then use the <code>count()</code> function to count the number of tweets within each five minute bin. We then use <code>ggplot</code> to plot a line chart where <code>created_at</code> is placed on the x-axis and <code>n</code>, number of tweets, is placed on the y-axis.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>start_time <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">time =</span> <span class="fu">as_datetime</span>(<span class="st">"2019-11-02 19:35:00"</span>, <span class="at">tz =</span> <span class="st">"America/Chicago"</span>), <span class="at">label =</span> <span class="st">"Start Time"</span>) </span>
@@ -654,8 +677,8 @@ $ profile_image_url       &lt;chr&gt; "http://pbs.twimg.com/profile_images/11813
 </div>
 <p>There you have it. A trend line plotting tweet volume throughout the course of the event. Do you see any areas where the match might have had a significant number of tweets?</p>
 </section>
-<section id="tidying-the-text-data-for-analysis-applying-the-sentiment-scores" class="level2" data-number="33.7">
-<h2 data-number="33.7" class="anchored" data-anchor-id="tidying-the-text-data-for-analysis-applying-the-sentiment-scores"><span class="header-section-number">33.7</span> Tidying the text data for analysis, applying the sentiment scores</h2>
+<section id="tidying-the-text-data-for-analysis-applying-the-sentiment-scores" class="level2" data-number="34.7">
+<h2 data-number="34.7" class="anchored" data-anchor-id="tidying-the-text-data-for-analysis-applying-the-sentiment-scores"><span class="header-section-number">34.7</span> Tidying the text data for analysis, applying the sentiment scores</h2>
 <p>Okay, that’s cool–but what we really want to know is what are peoples’ sentiments throughout the game? Did they feel positive or negative throughout the event? Were there times that were more positive or negative? To achieve this, we are going to use the <code>tidytext</code> package to tidy up our text data and apply a sentiment score to each word held within each tweet. Let’s break this down step-by-step.</p>
 <p>First, we need to get the dictionary that contains the sentiment scoring for thousands of words used in the English language. <code>afinn &lt;- get_sentiments("afinn")</code> does just that for us. The development of these sentiment dictionaries is beyond this chapter. However, most of these dictionaries are crowd sourced by having people provide self-responses on how positive or negative a word is to them. For now, just understand the <code>affin</code> variable contains many words that have been rated for how positive or negative a word is on a scale that ranges from -5 to 5. -5 being the most negative, and 5 being the most positive. If you want to learn more about this dictionary or others, you can read more about them <a href="https://www.tidytextmining.com/sentiment.html">here</a>.</p>
 <p>Second, now that we have our dictionary imported, we need to clean up our tweets data set so we can apply sentiment scores to each word used within each tweet. There’s one problem, though. Each row in our data set is a complete tweet. For us to apply a sentiment score for each word, each word needs to get its own row. This is where the <code>unnest_tokens()</code> function from the <code>tidytext</code> package comes into play. We use this function to create a data set that will create a new column called word, which will place every word from every tweet in our data set on its own row, which it knows which text data to this because we set the the second argument to the column name that holds our text data. In this case, we give it the <code>text</code> column. Once you run this code, if you look at the <code>volleyball_tweets_tidy</code> object, you should now have a data set where every row has its own word which was done for every tweet. This data frame should now be a super long data frame.</p>
@@ -671,8 +694,8 @@ $ profile_image_url       &lt;chr&gt; "http://pbs.twimg.com/profile_images/11813
 <pre><code>Joining, by = "word"</code></pre>
 </div>
 </div>
-<section id="fan-sentiment-over-the-game" class="level4" data-number="33.7.0.1">
-<h4 data-number="33.7.0.1" class="anchored" data-anchor-id="fan-sentiment-over-the-game"><span class="header-section-number">33.7.0.1</span> Fan sentiment over the game</h4>
+<section id="fan-sentiment-over-the-game" class="level4" data-number="34.7.0.1">
+<h4 data-number="34.7.0.1" class="anchored" data-anchor-id="fan-sentiment-over-the-game"><span class="header-section-number">34.7.0.1</span> Fan sentiment over the game</h4>
 <p>Now that we have a tidied textual data set, all we need to do is apply our sentiment scores to these words using the <code>inner_join()</code>, then <code>group_by()</code> our <code>created_at</code> variable, and calculate the mean sentiment for each five minute interval. At this point, we will use <code>ggplot</code> to plot sentiment of the tweets over time. We will do this by plotting the <code>created_at</code> variable on the x-axis and the newly calculated <code>sentiment</code> variable on the y-axis. The rest is just adding annotations and styling, which we are already familiar with.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>volleyball_tweets_sentiment <span class="ot">&lt;-</span> volleyball_tweets_tidy <span class="sc">%&gt;%</span></span>
@@ -706,8 +729,8 @@ $ profile_image_url       &lt;chr&gt; "http://pbs.twimg.com/profile_images/11813
 <p>Also, we need to consider that this match took place after the Huskers loss to Purdue, which we will examine in the next example. This is important to know because people during the volleyball match may have also been tweeting about how poorly the football game went earlier in the day. Thus, low tweet volume mixed with the potential for tweets referencing something other than the match at hand may have had some influence on the sentiment scores.</p>
 <p>There’s also one last thing to keep in mind when you draw conclusions from this type of text data. Language is complex–it can have multiple meanings, which is highly influenced by context. Take for example the word ‘destroy’, like its use in the following statement: “This team is going to destroy the defense today.” Although we clearly can see this is a positive statement, when a computer applies sentiment scores, the context of the statement is stripped away, and destroy will be scored as negative sentiment. In short, computers are not smart enough to include context when they calculate sentiment, yet. So, keep this limitation in mind when you draw conclusions from your sentiment analyses using text data.</p>
 </section>
-<section id="example-2---nebraskas-loss-to-purdue-what-were-fans-sentiments-towards-this-loss" class="level3" data-number="33.7.1">
-<h3 data-number="33.7.1" class="anchored" data-anchor-id="example-2---nebraskas-loss-to-purdue-what-were-fans-sentiments-towards-this-loss"><span class="header-section-number">33.7.1</span> Example 2 - Nebraska’s loss to Purdue, what were fan’s sentiments towards this loss?</h3>
+<section id="example-2---nebraskas-loss-to-purdue-what-were-fans-sentiments-towards-this-loss" class="level3" data-number="34.7.1">
+<h3 data-number="34.7.1" class="anchored" data-anchor-id="example-2---nebraskas-loss-to-purdue-what-were-fans-sentiments-towards-this-loss"><span class="header-section-number">34.7.1</span> Example 2 - Nebraska’s loss to Purdue, what were fan’s sentiments towards this loss?</h3>
 <p>The Nebraska Cornhuskers–<a href="https://nebraska.rivals.com/news/nebraska-at-purdue-keys-to-victory-hol-score-predictions">a 3-point favorite going into West Lafayette, IN</a>–squared off with the Purdue Boilermakers on November 2, 2019. Purdue was 2-6 on the season. Nebraska, with a 4-4 record coming off of a 38-31 home loss to Indiana, had many fans hoping Scott Frost could lead his team to a must needed win. <a href="https://journalstar.com/sports/huskers/sipple/steven-m-sipple-frost-s-reaction-to-moos-six-win/article_bcebc067-865e-59a7-948d-c99290201294.html">Especially given the expectation was the Cornhuskers would go 6-6 on the season</a>, and the team still had to play Wisconsin (6-2), Maryland (3-6), and Iowa (6-2) to get to those needed six wins to become bowl eligible. So, how did people particularly take this loss? Let’s use our Twitter data to get an answer.</p>
 <p>Again, we need to fix the time zone with the <code>with_tz()</code> function so the data is represented in Central Standard Time (CST). Then we apply our <code>filter()</code> command to window our data to when the game was taking place.</p>
 <div class="cell">
@@ -782,6 +805,21 @@ $ profile_image_url       &lt;chr&gt; "http://pbs.twimg.com/profile_images/11813
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    toggleBodyColorMode(window.document.querySelector("link#quarto-bootstrap"));
+  }
+  toggleBodyColorPrimary();  
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {
@@ -862,12 +900,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./finishingtouches.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Finishing touches</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Finishing touches</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./rvest.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Intro to rvest</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Intro to rvest</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
