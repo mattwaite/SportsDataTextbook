@@ -686,39 +686,46 @@
     "text": "The main projects in SPMC350 Sports Data Analysis and Visualization involve writing a blog post, created on GitHub pages, about a sports topic that uses code, data and three graphics to tell a story. The assignment is worth 20 percent of the semester grade.\nAn example of a B+/A- post: Is Nebraska the best worst team in college basketball?"
   },
   {
+    "objectID": "checklist.html#topic-checklist",
+    "href": "checklist.html#topic-checklist",
+    "title": "38  Project Checklist",
+    "section": "38.1 Topic checklist",
+    "text": "38.1 Topic checklist\n\nIs your topic original? Is it interesting?\nDoes your topic ask if Tom Brady, Michael Jordan, Lebron James, the 95 Huskers, Alabama football or Georgia’s 2021 defense is the GOAT? Then your topic is not original nor interesting.\nSeriously. Anything that asks if Alabama is good, or the Golden State Warriors, or any team that’s one more than one championship in a relatively short period of time. If you’re asking if they’re good, stop. Find something else.\nThere’s a very, very, very big world out there. Read. Listen. Find something new.\nStill stuck? Sometimes good projects come from pain. A decent idea might be is X as bad as we think? The one exception: If your idea is Nebraska is the best 3-9 team of all time, stop. It’s played out. Find another cosmically snake-bitten team or player.\nAnother idea: What sports are in season? What’s happening? Good or bad. Zero in on that."
+  },
+  {
     "objectID": "checklist.html#writing-checklist",
     "href": "checklist.html#writing-checklist",
     "title": "38  Project Checklist",
-    "section": "38.1 Writing checklist",
-    "text": "38.1 Writing checklist\n\nHave you spell checked your writing?\nHave you read what you have written out loud? Reading it out loud will help you find bad writing.\nNo really. Read it out loud. It makes a huge difference. If you stumble over your own words, you should rewrite it.\nIf what you read out loud doesn’t sound like you, rewrite it.\nDo you have complete sentences? Do you have active verbs?"
+    "section": "38.2 Writing checklist",
+    "text": "38.2 Writing checklist\n\nHave you spell checked your writing?\nHave you read what you have written out loud? Reading it out loud will help you find bad writing.\nNo really. Read it out loud. It makes a huge difference. If you stumble over your own words, you should rewrite it.\nIf what you read out loud doesn’t sound like you, rewrite it.\nDo you have complete sentences? Do you have active verbs?"
   },
   {
     "objectID": "checklist.html#headline-checklist",
     "href": "checklist.html#headline-checklist",
     "title": "38  Project Checklist",
-    "section": "38.2 Headline checklist",
-    "text": "38.2 Headline checklist\n\nAre your headlines just labels? Example: Nebraska’s offense. NBA’s Best Shooters. The best NFL punters. Those are labels, not headlines.\nDo your headlines tell a story, or attempt to draw me into one?\nDo your headlines include words that are what the chart is about?\nDo your headlines point me toward what I should see in the chart?"
+    "section": "38.3 Headline checklist",
+    "text": "38.3 Headline checklist\n\nAre your headlines just labels? Example: Nebraska’s offense. NBA’s Best Shooters. The best NFL punters. Those are labels, not headlines.\nDo your headlines tell a story, or attempt to draw me into one?\nDo your headlines include words that are what the chart is about?\nDo your headlines point me toward what I should see in the chart?"
   },
   {
     "objectID": "checklist.html#graphics-checklist",
     "href": "checklist.html#graphics-checklist",
     "title": "38  Project Checklist",
-    "section": "38.3 Graphics checklist",
-    "text": "38.3 Graphics checklist\n\nDo you have the required parts? They are: headline, chatter, credit line, source line.\nDo your graphics have annotations that help me determine what is going on? Example: Are important dots labeled on a scatterplot?\nAre there lines to show me averages? Are those lines labeled?\nCan I read bar chart axis text?\n\nDo each one of your charts tell a story? Can I tell what that story is in a glance?\nDo you use color sparingly to draw my attention to something specific?\nIs there separation between your headline size and your chatter size?\nDoes your typography have a hierarchy? Does your headline stand out from your chatter? Are your axis labels smaller than your data labels?\nHave you simplified the theme (i.e. dropped the default grey background)?\nAre your axis labels something anyone can understand?"
+    "section": "38.4 Graphics checklist",
+    "text": "38.4 Graphics checklist\n\nDo you have the required parts? They are: headline, chatter, credit line, source line.\nDo your graphics have annotations that help me determine what is going on? Example: Are important dots labeled on a scatterplot?\nAre there lines to show me averages? Are those lines labeled?\nCan I read bar chart axis text?\n\nDo each one of your charts tell a story? Can I tell what that story is in a glance?\nDo you use color sparingly to draw my attention to something specific?\nIs there separation between your headline size and your chatter size?\nDoes your typography have a hierarchy? Does your headline stand out from your chatter? Are your axis labels smaller than your data labels?\nHave you simplified the theme (i.e. dropped the default grey background)?\nAre your axis labels something anyone can understand?"
   },
   {
     "objectID": "checklist.html#code-checklist",
     "href": "checklist.html#code-checklist",
     "title": "38  Project Checklist",
-    "section": "38.4 Code checklist",
-    "text": "38.4 Code checklist\n\nAre your variables named what they are? Meaning, did you call your data logs when it’s made up of players? That’s bad.\nIs spaced out so it’s one line per command? Look at the example post for guidance.\nIs your code in the proper order? Libraries at the top. Data preparation before the graphics?\nDid you add message=FALSE, warning=FALSE to any {r} blocks that spit out large amounts of automated text? Your library step doesn’t need all that gibberish spitting out in your blog."
+    "section": "38.5 Code checklist",
+    "text": "38.5 Code checklist\n\nAre your variables named what they are? Meaning, did you call your data logs when it’s made up of players? That’s bad.\nIs spaced out so it’s one line per command? Look at the example post for guidance.\nIs your code in the proper order? Libraries at the top. Data preparation before the graphics?\nDid you add message=FALSE, warning=FALSE to any {r} blocks that spit out large amounts of automated text? Your library step doesn’t need all that gibberish spitting out in your blog."
   },
   {
     "objectID": "checklist.html#last-thing",
     "href": "checklist.html#last-thing",
     "title": "38  Project Checklist",
-    "section": "38.5 Last thing",
-    "text": "38.5 Last thing\nCan you see your blog post on the internet?\nThe link you are turning in starts with YourGitHubUserNameHere.github.io. If you are turning in a GitHub.com url, you are turning in the wrong thing."
+    "section": "38.6 Last thing",
+    "text": "38.6 Last thing\nCan you see your blog post on the internet?\nThe link you are turning in starts with YourGitHubUserNameHere.github.io. If you are turning in a GitHub.com url, you are turning in the wrong thing."
   },
   {
     "objectID": "usingpackages.html",
