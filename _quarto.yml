@@ -1,6 +1,7 @@
 project:
   type: book
-
+  output-dir: ../mattwaite.github.io/sports
+  
 book:
   title: "Sports Data Analysis and Visualization"
   subtitle: "Code, data and visuals for storytellers"
