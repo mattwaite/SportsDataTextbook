@@ -49,6 +49,7 @@ book:
     - blogging.qmd
     - checklist.qmd
     - usingpackages.qmd
+    - sportsreferencecsvs.qmd
 
 bibliography: references.bib
 
