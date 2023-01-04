@@ -50,6 +50,7 @@ book:
     - checklist.qmd
     - usingpackages.qmd
     - sportsreferencecsvs.qmd
+    - onboarding.qmd
 
 bibliography: references.bib
 

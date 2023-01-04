@@ -1,0 +1,93 @@
+# Installations
+
+You're going to do things most of you aren't used to doing with your computer in this class. In order to do that, you need to clean up your computer. I've seen what your computer looks like. It's disgusting.
+
+### Part 1: Update and patch your operating system
+
+**On a Mac:**
+
+1.  Open System Preferences. Then click on Software Update:
+
+![](images/Screen%20Shot%202020-07-30%20at%205.35.08%20PM.png)
+
+2.  Check and see if you have the latest version of the Mac OS installed. If your computer says "Your Mac is up to date", then you're good to go, regardless of what comes next.
+
+![The latest version of the Mac OS is called Ventura.](images/Screen%20Shot%202021-08-09%20at%2011.27.01%20AM.png)
+
+3.  If you aren't on Ventura and you can update to it, you should do it. This will take some time -- hours, so don't do it when you need your laptop -- but it's important for you and your computer to stay up to date on operating systems.
+
+4.  When you're done, make sure you click the Automatically keep my Mac up to date box and install those updates regularly. Don't ignore them. Don't snooze them. Install them.
+
+5.  With an up-to-date operating system, now install the command line tools. To do this, click on the magnifying glass in the top right of the screen and type terminal. Hit enter -- the first entry is the terminal app.
+
+6.  In the terminal app, type `xcode-select --install` and hit enter. Let it run.
+
+![](images/Screen%20Shot%202020-07-30%20at%206.01.06%20PM.png)
+
+**On Windows:**
+
+1.  Type Updates into the Cortana search then click Check for updates
+
+![](images/Screen%20Shot%202020-07-30%20at%205.46.50%20PM.png)
+
+2.  After the search for updates completes, apply any that you have. Depending on if you'd done this recently or if you have automatic updates set, this might take a long time or go very quickly.
+
+![](images/Screen%20Shot%202020-07-30%20at%205.47.33%20PM.png)
+
+    3.  When you're done, make sure you set up automatic updates for your Windows machine and install those updates regularly. Don't ignore them. Don't snooze them. Install them.
+
+### Part 2: Install R and R Studio
+
+**On a Mac:**
+
+1.  [Download the latest version of R from CRAN](https://rweb.crmda.ku.edu/cran/) for Mac.
+
+![](images/Screen%20Shot%202020-07-30%20at%205.26.45%20PM.png)
+
+![](images/Screen%20Shot%202021-08-09%20at%2011.33.39%20AM.png)
+
+2.  If it doesn't open automatically, double click on the file that downloads to your downloads folder, click okay and accept the defaults and the license agreement.
+
+3.  [Download the latest R Studio for Mac under Step 2.](https://posit.co/download/rstudio-desktop/) The number will be different from the screenshot below, but the process is the same.
+
+4.  Click, hold and drag the RStudio icon into the Applications folder shortcut.
+
+![](images/Screen%20Shot%202020-07-30%20at%206.07.20%20PM.png)
+
+5.  To get the RStudio icon to appear in your dock -- you are going to use Rstudio for every single class we have this semester, so it would make sense -- open a Finder window, go to your applications, open R Studio there, and then drag the icon to where you want it to appear in your dock. It will stay there after you have quit the program. To get rid of it after the semester is over, just drag the icon far enough out of the dock until you see a cloud icon appear.
+
+**On Windows:**
+
+1.  [Download R 4.2.2 from CRAN](https://rweb.crmda.ku.edu/cran/) for Windows. The numbers in the screenshots below are 4.0.2, but the process is the same.
+
+![](images/Screen%20Shot%202020-07-30%20at%205.26.45%20PM.png)
+
+![](images/Screen%20Shot%202020-07-30%20at%206.15.51%20PM.png)
+
+![](images/Screen%20Shot%202021-08-09%20at%2011.36.34%20AM.png)
+
+2.  Open and run the executable, accept the defaults and license agreement.
+
+![](images/Screen%20Shot%202020-07-30%20at%206.20.00%20PM.png)
+
+3.  Go back to the screen where you downloaded the base R language, then download and install R Tools.
+4.  [Download R Studio for Windows on step 2 of this page.](https://posit.co/download/rstudio-desktop/) Open the executable the same way you opened R. Hit next until it starts installing.
+5.  You can find it by typing RStudio into the Cortana search.
+
+### Part 3: Installing R libraries
+
+1.  Open R Studio. It should show the Console view by default. We'll talk a lot more about the console later.
+2.  Copy and paste this into the console and hit enter:
+
+`install.packages(c("tidyverse", "rmarkdown", "lubridate", "janitor", "cowplot, "learnr", "remotes"))`
+
+![](images/Screen%20Shot%202020-07-30%20at%206.30.16%20PM.png)
+
+### Part 4: Install Slack
+
+1.  Install [Slack](https://slack.com/get) **on your computer and your phone** (you can find Slack in whatever app store you use). The reason I want it on both is because you are going to ask me for help with code via Slack. **Do not use screenshots unless specifically asked**. I want you to copy and paste your code. You can't do that on a phone. So you need the desktop version. But I can usually solve your problem within a few minutes if you respond right away, and I know that you have your phone on you and are checking it. So the desktop version is for work, the phone version is for notifications.
+2.  Email me the address you want connected to Slack. Use one you'll actually check.
+3.  When you get the Slack invitation email, log in to the class slack via the apps, **not the website**.
+4.  Add the #r channel for general help I'll send to everyone in the channel and, if you want, the #jobstuff channel for news about jobs I come across.
+
+![](images/Screen%20Shot%202020-07-30%20at%207.06.05%20PM.png)

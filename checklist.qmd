@@ -8,7 +8,7 @@ An example of a B+/A- post: [Is Nebraska the best worst team in college basketba
 
 1.  Is your topic original? Is it interesting?
 2.  Does your topic ask if Tom Brady, Michael Jordan, Lebron James, the 95 Huskers, Alabama football or Georgia's 2021 defense is the GOAT? Then your topic is not original nor interesting.
-3.  Seriously. Anything that asks if Alabama is good, or the Golden State Warriors, or any team that's one more than one championship in a relatively short period of time. If you're asking if they're good, stop. Find something else.
+3.  Seriously. Anything that asks if Alabama is good, or the Golden State Warriors, or any team that's won more than one championship in a relatively short period of time. If you're asking if they're good, stop. Find something else.
 4.  There's a very, very, very big world out there. Read. Listen. Find something new.
 5.  Still stuck? Sometimes good projects come from pain. A decent idea might be is X as bad as we think? The one exception: If your idea is Nebraska is the best 3-9 team of all time, stop. It's played out. Find another cosmically snake-bitten team or player.
 6.  Another idea: What sports are in season? What's happening? Good or bad. Zero in on that.
@@ -33,23 +33,22 @@ An example of a B+/A- post: [Is Nebraska the best worst team in college basketba
 1.  Do you have the required parts? They are: headline, chatter, credit line, source line.
 2.  Do your graphics have annotations that help me determine what is going on? Example: Are important dots labeled on a scatterplot?
 3.  Are there lines to show me averages? Are those lines labeled?
-4.  Can I read bar chart axis text?\
+4.  Can I read bar chart axis text?
 5.  Do each one of your charts tell a story? Can I tell what that story is in a glance?
 6.  Do you use color sparingly to draw my attention to something specific?
 7.  Is there separation between your headline size and your chatter size?
 8.  Does your typography have a hierarchy? Does your headline stand out from your chatter? Are your axis labels smaller than your data labels?
 9.  Have you simplified the theme (i.e. dropped the default grey background)?
 10. Are your axis labels something anyone can understand?
+11. Does your theme element in any ggplot chart include plot.title.position="plot" to move the headline flush left instead of that weird indent?
 
 ## Code checklist
 
 1.  Are your variables named what they are? Meaning, did you call your data logs when it's made up of players? That's bad.
 2.  Is spaced out so it's one line per command? Look at the example post for guidance.
 3.  Is your code in the proper order? Libraries at the top. Data preparation before the graphics?
-4.  Did you add message=FALSE, warning=FALSE to any `{r}` blocks that spit out large amounts of automated text? Your library step doesn't need all that gibberish spitting out in your blog.
+4.  **Did you add message=FALSE, warning=FALSE to any `{r}` blocks that spit out large amounts of automated text? Your library step doesn't need all that gibberish spitting out in your blog.**
 
 ## Last thing
 
-Can you see your blog post on the internet?
-
-The link you are turning in starts with YourGitHubUserNameHere.github.io. If you are turning in a GitHub.com url, you are turning in the wrong thing.
+The link you are turning in starts with YourGitHubUserNameHere.github.io **but is not just your username.github.io url**. **Submit the link to the post**. If you are turning in a GitHub.com url, you are turning in the wrong thing.
