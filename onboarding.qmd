@@ -79,7 +79,7 @@ You're going to do things most of you aren't used to doing with your computer in
 1.  Open R Studio. It should show the Console view by default. We'll talk a lot more about the console later.
 2.  Copy and paste this into the console and hit enter:
 
-`install.packages(c("tidyverse", "rmarkdown", "lubridate", "janitor", "cowplot, "learnr", "remotes"))`
+`install.packages(c("tidyverse", "rmarkdown", "lubridate", "janitor", "cowplot", "learnr", "wehoop", "worldfootballR", "remotes", "devtools", "waffle", "ggrepel", "ggbeeswarm", "ggbump", "ggalt", "ggtext", "rvest", "Hmisc", "cluster"))`
 
 ![](images/Screen%20Shot%202020-07-30%20at%206.30.16%20PM.png)
 
