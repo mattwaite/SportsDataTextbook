@@ -40,7 +40,7 @@ You're going to do things most of you aren't used to doing with your computer in
 
 **On a Mac:**
 
-1.  [Download the latest version of R from CRAN](https://rweb.crmda.ku.edu/cran/) for Mac.
+1.  [Download the latest version of R from CRAN](https://cran.rstudio.com/) for Mac.
 
 ![](images/Screen%20Shot%202020-07-30%20at%205.26.45%20PM.png)
 
@@ -58,7 +58,7 @@ You're going to do things most of you aren't used to doing with your computer in
 
 **On Windows:**
 
-1.  [Download R 4.2.2 from CRAN](https://rweb.crmda.ku.edu/cran/) for Windows. The numbers in the screenshots below are 4.0.2, but the process is the same.
+1.  [Download R 4.2.2 from CRAN](https://cran.rstudio.com/) for Windows. The numbers in the screenshots below are 4.0.2, but the process is the same.
 
 ![](images/Screen%20Shot%202020-07-30%20at%205.26.45%20PM.png)
 
