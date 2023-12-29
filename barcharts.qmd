@@ -57,18 +57,18 @@ attendance <- read_csv('data/attendance.csv')
 First, let's get a top 10 list by announced attendance in the most recent season we have data. We'll use the same tricks we used in the filtering assignment.
 
 ```{r}
-attendance %>% 
-  arrange(desc(`2018`)) %>% 
-  top_n(10) %>% 
+attendance |> 
+  arrange(desc(`2018`)) |> 
+  top_n(10) |> 
   select(Institution, `2018`)
 ```
 
 That looks good, so let's save it to a new data frame and use that data frame instead going forward.
 
 ```{r}
-top10 <- attendance %>%
-  arrange(desc(`2018`)) %>% 
-  top_n(10) %>% 
+top10 <- attendance |>
+  arrange(desc(`2018`)) |> 
+  top_n(10) |> 
   select(Institution, `2018`)
 ```
 

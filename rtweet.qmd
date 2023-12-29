@@ -121,7 +121,7 @@ To provide a little context, I pulled the data in this chapter on Sunday, Novemb
 To make it easier to work with, I am going to combine these two data sets into one using the `bind_rows()` function from `dplyr`. There is a slight problem though, some people may have had a tweet that contained both the **#huskers** and **#GBR** hashtags in their tweet. So if we combine these two data sets, there might be duplicate data. To dedupe the data, we can apply a `distinct(text, .keep_all = TRUE)` to remove any duplicates. The `.keep_all = TRUE` argument just tells R to keep all columns in the data frame after our data has been deduped.
 
 ```{r}
-tweet_data <- bind_rows(huskerTweets, gbrTweets) %>% 
+tweet_data <- bind_rows(huskerTweets, gbrTweets) |> 
   distinct(text, .keep_all = TRUE)
 ```
 
@@ -138,7 +138,7 @@ glimpse(tweet_data)
 As you can see, `glimpse()` returns a lot of columns that are not really relevant to our analysis. Let's apply a `select()` function to only retain the data relevant to our analysis, .
 
 ```{r}
-tweet_data <- tweet_data %>% 
+tweet_data <- tweet_data |> 
   select(user_id, status_id, created_at, screen_name, text, display_text_width,
          favorite_count, retweet_count, hashtags, description, followers_count)
 ```
@@ -154,9 +154,9 @@ We will use the `with_tz()` on our `created_at` variable within our `mutate()` f
 Then, since we are only interested in tweets during the game, we can apply a `dplyr` `filter()` function to window our data set to tweets being posted around the start and end of the game.
 
 ```{r}
-volleyball_tweets <- tweet_data %>%
+volleyball_tweets <- tweet_data |>
   mutate(created_at = with_tz(created_at, tzone = "America/Chicago"),
-         created_at = round_time(created_at, "5 mins", tz = "America/Chicago")) %>% 
+         created_at = round_time(created_at, "5 mins", tz = "America/Chicago")) |> 
   filter(created_at >= "2019-11-02 18:30:00" & created_at <= "2019-11-02 23:30:00") 
 ```
 
@@ -166,8 +166,8 @@ One question we might have pertains to the number of tweets that occur during th
 
 ```{r}
 start_time <- tibble(time = as_datetime("2019-11-02 19:35:00", tz = "America/Chicago"), label = "Start Time") 
-volleyball_time <- volleyball_tweets %>%
-  group_by(created_at) %>% 
+volleyball_time <- volleyball_tweets |>
+  group_by(created_at) |> 
   count()
 
 ggplot() +
@@ -197,8 +197,8 @@ If you get an error on the next bit of code, you'll likely need to install the t
 ```{r}
 afinn <- get_sentiments("afinn")
 
-volleyball_tweets_tidy <- volleyball_tweets %>% 
-  unnest_tokens(word, text) %>% 
+volleyball_tweets_tidy <- volleyball_tweets |> 
+  unnest_tokens(word, text) |> 
   anti_join(stop_words) 
 ```
 
@@ -207,9 +207,9 @@ volleyball_tweets_tidy <- volleyball_tweets %>%
 Now that we have a tidied textual data set, all we need to do is apply our sentiment scores to these words using the `inner_join()`, then `group_by()` our `created_at` variable, and calculate the mean sentiment for each five minute interval. At this point, we will use `ggplot` to plot sentiment of the tweets over time. We will do this by plotting the `created_at` variable on the x-axis and the newly calculated `sentiment` variable on the y-axis. The rest is just adding annotations and styling, which we are already familiar with.
 
 ```{r}
-volleyball_tweets_sentiment <- volleyball_tweets_tidy %>%
-  inner_join(afinn) %>% 
-  group_by(created_at) %>% 
+volleyball_tweets_sentiment <- volleyball_tweets_tidy |>
+  inner_join(afinn) |> 
+  group_by(created_at) |> 
   summarise(sentiment = mean(value))
 
 ggplot() +
@@ -243,9 +243,9 @@ The Nebraska Cornhuskers--[a 3-point favorite going into West Lafayette, IN](htt
 Again, we need to fix the time zone with the `with_tz()` function so the data is represented in Central Standard Time (CST). Then we apply our `filter()` command to window our data to when the game was taking place.
 
 ```{r}
-football_tweets <- tweet_data %>%
+football_tweets <- tweet_data |>
   mutate(created_at = with_tz(created_at, tzone = "America/Chicago"),
-         created_at = round_time(created_at, "5 mins", tz = "America/Chicago")) %>% 
+         created_at = round_time(created_at, "5 mins", tz = "America/Chicago")) |> 
   filter(created_at >= "2019-11-02 11:00:00" & created_at <= "2019-11-02 15:30:00") 
 
 ```
@@ -253,8 +253,8 @@ football_tweets <- tweet_data %>%
 Now, let's just get a sense of the number of tweets that occurred at certain points in the game. We again need to do some data wrangling with `group_by()`, and then we use the `count()` function to add up all the tweets during each five minute interval. Once the data is wrangled, we can use our `ggplot` code to visualize tweet volume throughout the game.
 
 ```{r}
-football_time <- football_tweets %>%
-  group_by(created_at) %>% 
+football_time <- football_tweets |>
+  group_by(created_at) |> 
   count()
 
 ggplot() +
@@ -270,8 +270,8 @@ As before, let's pull in our sentiment library with the `get_sentiments()` funct
 ```{r}
 afinn <- get_sentiments("afinn")
 
-football_tweets_tidy <- football_tweets %>% 
-  unnest_tokens(word, text) %>% 
+football_tweets_tidy <- football_tweets |> 
+  unnest_tokens(word, text) |> 
   anti_join(stop_words) 
 ```
 
@@ -280,10 +280,10 @@ We now have our clean textual data, let's apply sentiment scores for each word u
 You can then use the `ggplot` code to plot sentiment over time, introduce annotations to highlight specific aspects within our plot, and then apply styling to the plot to move it closer to publication readiness. Now for the big reveal, how did people take the loss to a 2-6 Purdue? Run the code and find out.
 
 ```{r}
-football_tweets_sentiment <- football_tweets_tidy %>%
-  inner_join(afinn) %>% 
-  group_by(created_at) %>% 
-  summarise(sentiment = mean(value)) %>% 
+football_tweets_sentiment <- football_tweets_tidy |>
+  inner_join(afinn) |> 
+  group_by(created_at) |> 
+  summarise(sentiment = mean(value)) |> 
   arrange(sentiment)
 
 ggplot() +

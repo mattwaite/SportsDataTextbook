@@ -1,0 +1,17 @@
+# Installing the tutorials
+
+**NOTE: If you haven't done the installations assignment first, STOP. This won't work. You have to do that assignment before you can do this one.**
+
+Half of the points in SPMC 350 comes from assignments you'll do for each class that build up your analysis toolbox. The "book" in this class is a series of interactive tutorials that walks you through the materials. It'll explain the why and the what and you'll have to fill in the blanks on the code to see it work.
+
+To get the tutorials, do the following.
+
+1.  Open R Studio. ![](images/tutorials1.png)
+
+2.  R Studio defaults to the console view. This is good, This is where you want to be.![](images/tutorials2.png)
+
+3.  In the console, enter the following:
+
+    `devtools::install_github("mattwaite/SportsDataTutorials")`
+
+4.  You should see some automated output. If you are told there are newer libraries and asked if you want to install them, just hit enter. When it is done, quit R Studio and restart it. This is what it will look like when done.![](images/tutorials3.png)

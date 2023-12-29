@@ -43,7 +43,7 @@ logs <- read_csv("data/logs20.csv")
 Let's narrow our pile and look just at the Big Ten.
 
 ```{r}
-big10 <- logs %>% filter(Conference == "Big Ten")
+big10 <- logs |> filter(Conference == "Big Ten")
 ```
 
 The first thing we can do is look at a line chart, like we have done in previous chapters. 
@@ -66,7 +66,7 @@ ggplot() +
 Answer: Not immediately clear, but we can look at this and analyze it. We could add a piece of annotation to help us out. 
 
 ```{r}
-big10 %>% summarise(mean(TeamFGPCT))
+big10 |> summarise(mean(TeamFGPCT))
 ```
 
 ```{r}

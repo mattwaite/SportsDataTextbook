@@ -44,13 +44,13 @@ logs <- read_csv("data/footballlogs20.csv")
 I'm going to set up a point chart that places teams on two-axes -- yards per play on offense on the x axis, and yards per play on defense. We did this in the bubble charts example.
 
 ```{r}
-logs %>% 
-  group_by(Team, Conference) %>% 
+logs |> 
+  group_by(Team, Conference) |> 
   summarise(
     TotalPlays = sum(OffensivePlays), 
     TotalYards = sum(OffensiveYards), 
     DefensivePlays = sum(DefPlays), 
-    DefensiveYards = sum(DefYards)) %>% 
+    DefensiveYards = sum(DefYards)) |> 
   mutate(
     OffensiveYPP = TotalYards/TotalPlays, 
     DefensiveYPP = DefensiveYards/DefensivePlays) -> ypp
@@ -59,7 +59,7 @@ logs %>%
 To build the annotations, I want the average for offensive yards per play and defensive yards per play. We're going to use those as a proxy for quality. If your team averages more yards per play on offense, that's good. If they average fewer yards per play on defense, that too is good. So that sets up a situation where we have four corners, anchored by good at both and bad at both. The averages will create lines to divide those four corners up. 
 
 ```{r}
-averages <- ypp %>% ungroup() %>% summarise(AvgOffYardsPer = mean(OffensiveYPP), AvgDefYardsPer = mean(DefensiveYPP))
+averages <- ypp |> ungroup() |> summarise(AvgOffYardsPer = mean(OffensiveYPP), AvgDefYardsPer = mean(DefensiveYPP))
 
 averages
 ```
@@ -69,7 +69,7 @@ I also want to highlight playoff teams.
 ```{r}
 playoff_teams <- c("Notre Dame", "Alabama", "Clemson", "Ohio State")
 
-playoffs <- ypp %>% filter(Team %in% playoff_teams)
+playoffs <- ypp |> filter(Team %in% playoff_teams)
 ```
 
 Now we create the plot. We have two geom_points, starting with everyone, then playoff teams. I alter the colors on each to separate them. Next, I add a geom_hline to add the horizontal line of my defensive average and a geom_vline for my offensive average. Next, I want to add some text annotations, labeling two corners of my chart (the other two, in my opinion, become obvious). Then, I want to label all the playoff teams. I use `geom_text_repel` to do that -- it's using the ggrepel library to push the text away from the dots, respective of other labels and other dots. It means you don't have to move them around so you can read them, or so they don't cover up the dots. 

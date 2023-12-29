@@ -59,9 +59,9 @@ Well, it's a start.
 The warning that you're seeing is that there's three teams last season who made one appearance on the college football playoff rankings and disappeared. Nebraska fans would bite your arm off for that. Alas. We should eliminate them and thin up our chart a little. Let's just take teams that finished in the top 10. We're going to use a neat filter trick for this that you learned earlier using %in%. 
 
 ```{r}
-top10 <- rankings %>% filter(Week == 17 & Rank <= 10)
+top10 <- rankings |> filter(Week == 17 & Rank <= 10)
 
-newrankings <- rankings %>% filter(Team %in% top10$Team)
+newrankings <- rankings |> filter(Team %in% top10$Team)
 ```
 
 Now you have something called newrankings that shows how teams who finished in the top 10 at the end of the season ended up there. And every team who finished in the top 10 in week 17 had been in the rankings more than once in the 5 weeks before. 
@@ -105,8 +105,8 @@ Another step. But the legend is annoying. And trying to find which red is Alabam
 ggplot() + 
   geom_bump(data=newrankings, aes(x=Week, y=Rank, color=Team)) + 
   geom_point(data=newrankings, aes(x=Week, y=Rank, color=Team), size = 4) +   
-  geom_text(data = newrankings %>% filter(Week == min(Week)), aes(x = Week - .2, y=Rank, label = Team), size = 3, hjust = 1) +
-  geom_text(data = newrankings %>% filter(Week == max(Week)), aes(x = Week + .2, y=Rank, label = Team), size = 3, hjust = 0) +
+  geom_text(data = newrankings |> filter(Week == min(Week)), aes(x = Week - .2, y=Rank, label = Team), size = 3, hjust = 1) +
+  geom_text(data = newrankings |> filter(Week == max(Week)), aes(x = Week + .2, y=Rank, label = Team), size = 3, hjust = 0) +
   scale_color_manual(values = c("#9E1B32","#E00122", "#F56600", "#0021A5", "#BA0C2F", "#F1BE48","#C99700", "#bb0000", "#841617", "#500000")) +
   scale_y_reverse() 
 ```
@@ -117,8 +117,8 @@ Better, but the legend is still there. We can drop it in a theme directive by sa
 ggplot() + 
   geom_bump(data=newrankings, aes(x=Week, y=Rank, color=Team)) + 
   geom_point(data=newrankings, aes(x=Week, y=Rank, color=Team), size = 4) +   
-  geom_text(data = newrankings %>% filter(Week == min(Week)), aes(x = Week - .2, y=Rank, label = ShortTeam), size = 3, hjust = 1) +
-  geom_text(data = newrankings %>% filter(Week == max(Week)), aes(x = Week + .2, y=Rank, label = ShortTeam), size = 3, hjust = 0) +
+  geom_text(data = newrankings |> filter(Week == min(Week)), aes(x = Week - .2, y=Rank, label = ShortTeam), size = 3, hjust = 1) +
+  geom_text(data = newrankings |> filter(Week == max(Week)), aes(x = Week + .2, y=Rank, label = ShortTeam), size = 3, hjust = 0) +
   labs(title="Was COVID college football boring?", subtitle="There was no drama at the top. None. So, yes?", y= "Rank", x = "Week") +
   theme_minimal() +
   theme(
@@ -135,8 +135,8 @@ Now let's fix our text hierarchy.
 ggplot() + 
   geom_bump(data=newrankings, aes(x=Week, y=Rank, color=Team)) + 
   geom_point(data=newrankings, aes(x=Week, y=Rank, color=Team), size = 4) +   
-  geom_text(data = newrankings %>% filter(Week == min(Week)), aes(x = Week - .2, y=Rank, label = ShortTeam), size = 3, hjust = 1) +
-  geom_text(data = newrankings %>% filter(Week == max(Week)), aes(x = Week + .2, y=Rank, label = ShortTeam), size = 3, hjust = 0) +
+  geom_text(data = newrankings |> filter(Week == min(Week)), aes(x = Week - .2, y=Rank, label = ShortTeam), size = 3, hjust = 1) +
+  geom_text(data = newrankings |> filter(Week == max(Week)), aes(x = Week + .2, y=Rank, label = ShortTeam), size = 3, hjust = 0) +
   labs(title="Was COVID college football boring?", subtitle="There was no drama at the top. None. So, yes?", y= "Rank", x = "Week") +
   theme_minimal() +
   theme(
@@ -160,8 +160,8 @@ One last thing: Let's change the width of the chart to make the names fit. We ca
 ggplot() + 
   geom_bump(data=newrankings, aes(x=Week, y=Rank, color=Team)) + 
   geom_point(data=newrankings, aes(x=Week, y=Rank, color=Team), size = 4) +   
-  geom_text(data = newrankings %>% filter(Week == min(Week)), aes(x = Week - .2, y=Rank, label = ShortTeam), size = 3, hjust = 1) +
-  geom_text(data = newrankings %>% filter(Week == max(Week)), aes(x = Week + .2, y=Rank, label = ShortTeam), size = 3, hjust = 0) +
+  geom_text(data = newrankings |> filter(Week == min(Week)), aes(x = Week - .2, y=Rank, label = ShortTeam), size = 3, hjust = 1) +
+  geom_text(data = newrankings |> filter(Week == max(Week)), aes(x = Week + .2, y=Rank, label = ShortTeam), size = 3, hjust = 0) +
   labs(title="Was COVID college football boring?", subtitle="There was no drama at the top. None. So, yes?", y= "Rank", x = "Week") +
   theme_minimal() +
   theme(

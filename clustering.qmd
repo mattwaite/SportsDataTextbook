@@ -56,18 +56,18 @@ To cluster this data properly, we have some work to do.
 First, it won't do to have players who haven't played, so we can use filter to find anyone with greater than 0 minutes played. Next, Cam Mack is a guard, so let's just look at guards. Third, we want to limit the data to things that make sense to look at for Cam Mack -- things like shooting, three point shooting, assists, turnovers and points. 
 
 ```{r}
-playersselected <- players %>% 
-  filter(MP>0) %>% filter(Pos == "G") %>% 
-  select(Player, Team, Pos, MP, `FG%`, `3P%`, AST, TOV, PTS) %>% 
+playersselected <- players |> 
+  filter(MP>0) |> filter(Pos == "G") |> 
+  select(Player, Team, Pos, MP, `FG%`, `3P%`, AST, TOV, PTS) |> 
   na.omit() 
 ```
 
 Now, k-means clustering doesn't work as well with data that can be on different scales. So comparing a percentage to a count metric -- shooting percentage to points -- would create chaos because shooting percentages are a fraction of 1 and points, depending on when they are in the season, could be quite large. So we have to scale each metric -- put them on a similar basis using the distance from the max value as our guide. Also, k-means clustering won't work with text data, so we need to create a dataframe that's just the numbers, but scaled. We can do that with another select, and using mutate_all with the scale function. The `na.omit()` means get rid of any blanks, because they too will cause errors. 
 
 ```{r}
-playersscaled <- playersselected %>% 
-  select(MP, `FG%`, `3P%`, AST, TOV, PTS) %>% 
-  mutate_all(scale) %>% 
+playersscaled <- playersselected |> 
+  select(MP, `FG%`, `3P%`, AST, TOV, PTS) |> 
+  mutate_all(scale) |> 
   na.omit()
 ```
 
@@ -118,7 +118,7 @@ Now we have a dataframe called playercluster that has our player names and what 
 We now have a dataset and can plot it like anything else. Let's get Cam Mack and then plot him against the rest of college basketball on assists versus minutes played. 
 
 ```{r}
-cm <- playercluster %>% filter(Player == "Cam Mack")
+cm <- playercluster |> filter(Player == "Cam Mack")
 
 cm
 ```
@@ -136,7 +136,7 @@ Not bad, not bad. But who are Cam Mack's peers? If we look at the numbers in Gro
 ```{r}
 big10 <- c("Nebraska Cornhuskers", "Iowa Hawkeyes", "Minnesota Golden Gophers", "Illinois Fighting Illini", "Northwestern Wildcats", "Wisconsin Badgers", "Indiana Hoosiers", "Purdue Boilermakers", "Ohio State Buckeyes", "Michigan Wolverines", "Michigan State Spartans", "Penn State Nittany Lions", "Rutgers Scarlet Knights", "Maryland Terrapins")
 
-playercluster %>% filter(k5.cluster == 3) %>% filter(Team %in% big10) %>% arrange(desc(MP))
+playercluster |> filter(k5.cluster == 3) |> filter(Team %in% big10) |> arrange(desc(MP))
 ```
 
 So there are the 11 guards most like Cam Mack in the Big Ten. Safe to say, these are the 11 best guards in the conference. 
@@ -148,19 +148,19 @@ How much does this change if we change the metrics? I used pretty standard box s
 We'll repeat the process. Filter out players who don't play, players with stats missing, and just focus on those stats listed above. 
 
 ```{r}
-playersadvanced <- players %>% 
-  filter(MP>0) %>% 
-  filter(Pos == "G") %>% 
-  select(Player, Team, Pos, PER, `TS%`, PProd, `AST%`, `WS/40`, BPM) %>% 
+playersadvanced <- players |> 
+  filter(MP>0) |> 
+  filter(Pos == "G") |> 
+  select(Player, Team, Pos, PER, `TS%`, PProd, `AST%`, `WS/40`, BPM) |> 
   na.omit() 
 ```
 
 Now to scale them. 
 
 ```{r}
-playersadvscaled <- playersadvanced %>% 
-  select(PER, `TS%`, PProd, `AST%`, `WS/40`, BPM) %>% 
-  mutate_all(scale) %>% 
+playersadvscaled <- playersadvanced |> 
+  select(PER, `TS%`, PProd, `AST%`, `WS/40`, BPM) |> 
+  mutate_all(scale) |> 
   na.omit()
 ```
 
@@ -203,7 +203,7 @@ playeradvcluster <- data.frame(playersadvanced, advk5$cluster)
 ```
 
 ```{r}
-cmadv <- playeradvcluster %>% filter(Player == "Cam Mack")
+cmadv <- playeradvcluster |> filter(Player == "Cam Mack")
 
 cmadv
 ```
@@ -214,9 +214,9 @@ Cluster 2 on my dataset. So in this season, we can say he's in a big group of pl
 Now who are his Big Ten peers?
 
 ```{r}
-playeradvcluster %>% 
-  filter(advk5.cluster == 2) %>% 
-  filter(Team %in% big10) %>% 
+playeradvcluster |> 
+  filter(advk5.cluster == 2) |> 
+  filter(Team %in% big10) |> 
   arrange(desc(PProd))
 
 ```

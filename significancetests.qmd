@@ -65,7 +65,7 @@ First, let's just look at scoring. Here's a theory: fans make players nervous. T
 First things first, let's create a new field, called `totalpoints` and add the two scores together. We'll need this, so we're going to make this a new dataframe called `points`.
 
 ```{r}
-points <- logs %>% mutate(totalpoints = TeamScore + OpponentScore )
+points <- logs |> mutate(totalpoints = TeamScore + OpponentScore )
 ```
 
 Typically speaking, with significance tests, the process involves creating two different means and then running a bunch of formulas on them. R makes this easy by giving you a `t.test` function, which does all the work for you. What we have to tell it is what is the value we are testing, over which groups, and from what data. It looks like this:
@@ -93,7 +93,7 @@ My hypothesis is that home court is no longer an advantage, and the home team wi
 First things first: We need to make a dataframe where Team is the home team. And then we'll create a differential between the home team and away team. If home court is an advantage, the differential should average out to be positive -- the home team scores more than the away team.
 
 ```{r}
-homecourt <- logs %>% filter(is.na(HomeAway) == TRUE) %>% mutate(differential = TeamScore - OpponentScore)
+homecourt <- logs |> filter(is.na(HomeAway) == TRUE) |> mutate(differential = TeamScore - OpponentScore)
 ```
 
 Now let's test it.

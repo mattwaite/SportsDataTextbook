@@ -42,7 +42,7 @@ logs <- read_csv("data/footballlogs1120.csv")
 One way to show how successful a footballl team was for a game is to show the differential between the team's score and the opponent's score. Score a lot more than the opponent = good, score a lot less than the opponent = bad. And, relatively speaking, the more the better. So let's create that differential. Let's also get our net yardage stat back. And because we'll need it later, let's add the turnover margin.
 
 ```{r}
-logs <- logs %>% mutate(
+logs <- logs |> mutate(
   Differential = TeamScore - OpponentScore, 
   NetYards = OffensiveYards - DefYards, 
   TurnoverMargin = DefTotalTurnovers - TotalTurnovers)
@@ -83,7 +83,7 @@ library(Hmisc)
 We can pass in every numeric value to the Hmisc library and get a correlation matrix out of it, but since we have a large number of values -- and many of them character values -- we should strip that down and reorder them. So that's what I'm doing here. I'm saying give me differential first, and then columns 9-24, and then 26-41. Why the skip? There's a blank column in the middle of the data -- a remnant of the scraper I used.
 
 ```{r}
-simplelogs <- logs %>% select_if(is.numeric) %>% select(-Game) %>% select(Differential, NetYards, TurnoverMargin, everything())
+simplelogs <- logs |> select_if(is.numeric) |> select(-Game) |> select(Differential, NetYards, TurnoverMargin, everything())
 ```
 
 Before we proceed, what we're looking to do is follow the Differential column down, looking for correlation values near 1 or -1. Correlations go from -1, meaning perfect negative correlation, to 0, meaning no correlation, to 1, meaning perfect positive correlation. So we're looking for numbers near 1 or -1 for their predictive value. BUT: We then need to see if that value is also highly correlated with something else. If it is, we have a decision to make.
@@ -118,8 +118,8 @@ How does this apply in the real world? Let's pretend for a minute that you are S
 So if our goal is to predict a conference champion team, we need to know what those teams did. Here's the regular season conference champions in this dataset.
 
 ```{r}
-logs %>% 
-  filter(Team == "Ohio State" & Season == 2020 | Team == "Ohio State" & Season == 2019 | Team == "Ohio State" & Season == 2018) %>% 
+logs |> 
+  filter(Team == "Ohio State" & Season == 2020 | Team == "Ohio State" & Season == 2019 | Team == "Ohio State" & Season == 2018) |> 
   summarise(
     meanNetYards = mean(NetYards),
     meanTurnoverMargin = mean(TurnoverMargin),
@@ -139,10 +139,10 @@ So a team with those numbers is going to average scoring 21 more points per game
 How does that compare to Nebraska this season?
 
 ```{r}
-logs %>% 
+logs |> 
   filter(
     Team == "Nebraska" & Season == 2020
-    ) %>% 
+    ) |> 
   summarise(
     meanNetYards = mean(NetYards),
     meanTurnoverMargin = mean(TurnoverMargin),

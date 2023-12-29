@@ -55,7 +55,7 @@ In our case, we want to know how much do three point shots made influence wins? 
 To do this, we need to use conditional logic -- `case_when` in this case -- to determine if the team won or lost the game. In this case, we'll create a new column called `winloss`. Case when statements can be read like this: When This is True, Do This. This bit of code -- which you can use in a lot of contexts in this class -- uses the `grepl` function to look for the letter W in the W_L column and, if it finds it, makes winloss 1. If it finds an L, it makes it 0. Sum your winloss column and you have your season win total. The reason we have to use `grepl` to find W or L is because Sports Reference will record overtime wins differently than regular wins. Same with losses.
 
 ```{r}
-winlosslogs <- logs %>% 
+winlosslogs <- logs |> 
   mutate(
     winloss = case_when(
       grepl("W", W_L) ~ 1, 
@@ -66,12 +66,12 @@ winlosslogs <- logs %>%
 Now we can get a dataframe together that gives us the total wins for each team, and the total three point shots made. We'll call that new dataframe `threedef`.
 
 ```{r}
-threedef <- winlosslogs %>% 
-  group_by(Team, season) %>% 
+threedef <- winlosslogs |> 
+  group_by(Team, season) |> 
   summarise(
     Wins = sum(winloss), 
     TotalOpp3P = sum(Opponent3P)
-    ) %>% na.omit()
+    ) |> na.omit()
 ```
 
 Now let's look at the scatterplot. With a scatterplot, we put what predicts the thing on the X axis, and the thing being predicted on the Y axis. In this case, X is our three pointers given up, y is our wins.
@@ -120,7 +120,7 @@ What does that mean? It means that as disappointing a season as it was, Nebraska
 Where is Nebraska on the plot? We know we can use layering for that.
 
 ```{r}
-nu <- threedef %>% filter(Team == "Nebraska Cornhuskers")
+nu <- threedef |> filter(Team == "Nebraska Cornhuskers")
 ```
 
 ```{r}
@@ -139,14 +139,14 @@ We could just average together each team's shooting night, but this isn't the sa
 Let's do this the hard -- read: correct -- way.
 
 ```{r}
-shooting <- winlosslogs %>% 
-  group_by(Team, season) %>% 
+shooting <- winlosslogs |> 
+  group_by(Team, season) |> 
   summarise(
     Wins = sum(winloss), 
     Shots = sum(TeamFGA),
     Makes = sum(TeamFG)
-    ) %>% 
-  mutate(AvgShootingPct = Makes/Shots) %>% 
+    ) |> 
+  mutate(AvgShootingPct = Makes/Shots) |> 
   na.omit()
 ```
 

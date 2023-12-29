@@ -112,8 +112,8 @@ After we group them together, we need to count them. We do that first by saying 
 Here's the code:
 
 ```{r}
-nbaplayers %>%
-  group_by(Pos) %>%
+nbaplayers |>
+  group_by(Pos) |>
   summarise(
     total = n()
   )
@@ -126,11 +126,11 @@ In this case, we wanted to group together positions, signified by the field name
 And when we run that, we get a list of positions with a count next to them. But it's not in any order. So we'll add another And Then Do This %\>% and use `arrange`. Arrange does what you think it does -- it arranges data in order. By default, it's in ascending order -- smallest to largest. But if we want to know the county with the most mountain lion sightings, we need to sort it in descending order. That looks like this:
 
 ```{r}
-nbaplayers %>%
-  group_by(Pos) %>%
+nbaplayers |>
+  group_by(Pos) |>
   summarise(
     total = n()
-  ) %>% arrange(desc(total))
+  ) |> arrange(desc(total))
 ```
 
 So the most common position in the NBA? Shooting guard, followed by power forward.
@@ -138,11 +138,11 @@ So the most common position in the NBA? Shooting guard, followed by power forwar
 We can, if we want, group by more than one thing. Which team has the most of a single position? To do that, we can group by the team -- called Tm in the data -- and position, or Pos in the data:
 
 ```{r}
-nbaplayers %>%
-  group_by(Tm, Pos) %>%
+nbaplayers |>
+  group_by(Tm, Pos) |>
   summarise(
     total = n()
-  ) %>% arrange(desc(total))
+  ) |> arrange(desc(total))
 ```
 
 So wait, what team is TOT?
@@ -160,8 +160,8 @@ Sticking with our NBA player data, we can calculate any number of measures insid
 Let's look just a the number of minutes each position gets.
 
 ```{r}
-nbaplayers %>%
-  group_by(Pos) %>%
+nbaplayers |>
+  group_by(Pos) |>
   summarise(
     count = n(),
     mean_minutes = mean(MP),
@@ -176,7 +176,7 @@ Why?
 Let's let sort help us.
 
 ```{r}
-nbaplayers %>% arrange(desc(MP))
+nbaplayers |> arrange(desc(MP))
 ```
 
 The player with the most minutes on the floor is a shooting guard. Shooting guard is the most common position, so that means there's CJ McCollum rolling up 2,556 minutes in a season, and then there's Cleveland Cavalier's sensation J.P. Macura. Never heard of J.P. Macura? Might be because he logged one minute in one game this season.
@@ -192,14 +192,14 @@ There's a ton of things we can do in summarize -- we'll work with more of them a
 Which position in the NBA plays the most minutes? And what is the highest and lowest minute total for that position? And how wide is the spread between minutes? We can find that with `sum` to add up the minutes to get the total minutes, `min` to find the minimum minutes, `max` to find the maximum minutes and `sd` to find the standard deviation in the numbers.
 
 ```{r}
-nbaplayers %>% 
-  group_by(Pos) %>% 
+nbaplayers |> 
+  group_by(Pos) |> 
   summarise(
     total = sum(MP), 
     avgminutes = mean(MP), 
     minminutes = min(MP),
     maxminutes = max(MP),
-    stdev = sd(MP)) %>% arrange(desc(total))
+    stdev = sd(MP)) |> arrange(desc(total))
 ```
 
 So again, no surprise, shooting guards spend the most minutes on the floor in the NBA. They average 842 minutes, but we noted why that's trouble. The minimum is the J.P. Macura Award, max is the Trailblazer's failing at load management, and the standard deviation is a measure of how spread out the data is. In this case, not the highest spread among positions, but pretty high. So you know you've got some huge minutes players and a bunch of bench players.

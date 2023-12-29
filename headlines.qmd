@@ -30,9 +30,9 @@ scoring <- read_csv("data/scoringoffense.csv")
 
 total <- read_csv("data/totaloffense.csv")
 
-offense <- total %>% left_join(scoring, by=c("Name", "Year"))
+offense <- total |> left_join(scoring, by=c("Name", "Year"))
 
-nu <- offense %>% filter(Name == "Nebraska") %>% filter(Year == 2018)
+nu <- offense |> filter(Name == "Nebraska") |> filter(Year == 2018)
 ```
 
 ```{r}

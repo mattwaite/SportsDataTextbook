@@ -65,7 +65,7 @@ No really. That's it. So we're looking for `\\\\.*`. That'll find two backslashe
 To find something in text, we'll use a function called `gsub`. The pattern in `gsub` is `pattern, what we want to replace it with, what column this can all be found in`. So in our example, the pattern is `\\\\.*`, what we want to replace it with is ... nothing, and this is all in the Player column. Here's the code. 
 
 ```{r}
-nbaplayers %>% mutate(Player=gsub("\\\\.*","",Player)) %>% head()
+nbaplayers |> mutate(Player=gsub("\\\\.*","",Player)) |> head()
 ```
 
 Just like that, the trash is gone.
@@ -115,7 +115,7 @@ For this, we're going to use a `tidyr` function called `separate` to split colum
 First, let's use that comma to split the player and the rest. Ignore the head at the end. That's just to keep it from showing you all 150.
 
 ```{r}
-kills %>% separate(Player, into=c("Player", "School"), sep=",") %>% head()
+kills |> separate(Player, into=c("Player", "School"), sep=",") |> head()
 ```
 
 Good start.
@@ -123,34 +123,34 @@ Good start.
 Now, let's get the conference separated. A problem is going to crop up here -- the paren is a special character, so we have to escape it with the `\\`. 
 
 ```{r}
-kills %>% 
-  separate(Player, into=c("Player", "School"), sep=",") %>%
-  separate(School, into=c("School", "Conference"), sep="\\(") %>% 
+kills |> 
+  separate(Player, into=c("Player", "School"), sep=",") |>
+  separate(School, into=c("School", "Conference"), sep="\\(") |> 
   head()
 ```
 
 Uh oh. Says we have problems in rows 15, 42 and 83. What are they? The NCAA has decided to put (FL), (NY) and (PA) into three teams to tell you they're in Florida, New York and Pennsylvania respectively. Well, we can fix that with some gsub and we'll use a switch called `fixed`, which when set to TRUE it means this literal string, no special characters.
 
 ```{r}
-kills %>% 
-  separate(Player, into=c("Player", "School"), sep=",") %>% 
-  mutate(School = gsub("(FL)", "FL", School, fixed=TRUE)) %>%
-  mutate(School = gsub("(NY)", "NY", School, fixed=TRUE)) %>%
-  mutate(School = gsub("(PA)", "PA", School, fixed=TRUE)) %>%
-  separate(School, into=c("School", "Conference"), sep="\\(") %>% 
+kills |> 
+  separate(Player, into=c("Player", "School"), sep=",") |> 
+  mutate(School = gsub("(FL)", "FL", School, fixed=TRUE)) |>
+  mutate(School = gsub("(NY)", "NY", School, fixed=TRUE)) |>
+  mutate(School = gsub("(PA)", "PA", School, fixed=TRUE)) |>
+  separate(School, into=c("School", "Conference"), sep="\\(") |> 
   head()
 ```
 
 One last thing: see the trailing paren?
 
 ```{r}
-kills %>% 
-  separate(Player, into=c("Player", "School"), sep=",") %>% 
-  mutate(School = gsub("(FL)", "FL", School, fixed=TRUE)) %>%
-  mutate(School = gsub("(NY)", "NY", School, fixed=TRUE)) %>%
-  mutate(School = gsub("(PA)", "PA", School, fixed=TRUE)) %>%
-  separate(School, into=c("School", "Conference"), sep="\\(") %>% 
-  mutate(Conference=gsub(")", "", Conference)) %>%
+kills |> 
+  separate(Player, into=c("Player", "School"), sep=",") |> 
+  mutate(School = gsub("(FL)", "FL", School, fixed=TRUE)) |>
+  mutate(School = gsub("(NY)", "NY", School, fixed=TRUE)) |>
+  mutate(School = gsub("(PA)", "PA", School, fixed=TRUE)) |>
+  separate(School, into=c("School", "Conference"), sep="\\(") |> 
+  mutate(Conference=gsub(")", "", Conference)) |>
   head()
 ```
 
@@ -161,31 +161,31 @@ Now, what should we do about Ht? 6-2 is not going to tell me much when I want to
 Separate again comes to the rescue.
 
 ```{r}
-kills %>% 
-  separate(Player, into=c("Player", "School"), sep=",") %>% 
-  mutate(School = gsub("(FL)", "FL", School, fixed=TRUE)) %>%
-  mutate(School = gsub("(NY)", "NY", School, fixed=TRUE)) %>%
-  mutate(School = gsub("(PA)", "PA", School, fixed=TRUE)) %>%
-  separate(School, into=c("School", "Conference"), sep="\\(") %>% 
-  mutate(Conference=gsub(")", "", Conference)) %>%
-  separate(Ht, into=c("Feet", "Inches"), sep="-") %>%
-  mutate(Feet = as.numeric(Feet), Inches = as.numeric(Inches)) %>%
+kills |> 
+  separate(Player, into=c("Player", "School"), sep=",") |> 
+  mutate(School = gsub("(FL)", "FL", School, fixed=TRUE)) |>
+  mutate(School = gsub("(NY)", "NY", School, fixed=TRUE)) |>
+  mutate(School = gsub("(PA)", "PA", School, fixed=TRUE)) |>
+  separate(School, into=c("School", "Conference"), sep="\\(") |> 
+  mutate(Conference=gsub(")", "", Conference)) |>
+  separate(Ht, into=c("Feet", "Inches"), sep="-") |>
+  mutate(Feet = as.numeric(Feet), Inches = as.numeric(Inches)) |>
   head()
 ```
 
 But how do we turn that into a height? Math!
 
 ```{r}
-kills %>% 
-  separate(Player, into=c("Player", "School"), sep=",") %>% 
-  mutate(School = gsub("(FL)", "FL", School, fixed=TRUE)) %>%
-  mutate(School = gsub("(NY)", "NY", School, fixed=TRUE)) %>%
-  mutate(School = gsub("(PA)", "PA", School, fixed=TRUE)) %>%
-  separate(School, into=c("School", "Conference"), sep="\\(") %>% 
-  mutate(Conference=gsub(")", "", Conference)) %>%
-  separate(Ht, into=c("Feet", "Inches"), sep="-") %>%
-  mutate(Feet = as.numeric(Feet), Inches = as.numeric(Inches)) %>%
-  mutate(Height = (Feet*12)+Inches) %>%
+kills |> 
+  separate(Player, into=c("Player", "School"), sep=",") |> 
+  mutate(School = gsub("(FL)", "FL", School, fixed=TRUE)) |>
+  mutate(School = gsub("(NY)", "NY", School, fixed=TRUE)) |>
+  mutate(School = gsub("(PA)", "PA", School, fixed=TRUE)) |>
+  separate(School, into=c("School", "Conference"), sep="\\(") |> 
+  mutate(Conference=gsub(")", "", Conference)) |>
+  separate(Ht, into=c("Feet", "Inches"), sep="-") |>
+  mutate(Feet = as.numeric(Feet), Inches = as.numeric(Inches)) |>
+  mutate(Height = (Feet*12)+Inches) |>
   head()
 ```
 

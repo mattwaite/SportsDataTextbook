@@ -47,18 +47,18 @@ We have game data, and we need season data. To get that, we need to do some grou
 
 ```{r}
 #| message: false
-games %>% 
-  group_by(Conference, Team) %>% 
+games |> 
+  group_by(Conference, Team) |> 
   summarise(
     SeasonOffRebounds = sum(TeamOffRebounds),
     SeasonTotalRebounds = sum(TeamTotalRebounds)
-  ) %>%
+  ) |>
   mutate(
     SeasonDefRebounds = SeasonTotalRebounds - SeasonOffRebounds
-  ) %>% 
+  ) |> 
   select(
     -SeasonTotalRebounds
-  ) %>% 
+  ) |> 
   filter(Conference == "Big Ten")
 ```
 
@@ -66,25 +66,25 @@ By looking at this, we can see we got what we needed. We have 14 teams and numbe
 
 ```{r}
 #| message: false
-games %>% 
-  group_by(Conference, Team) %>% 
+games |> 
+  group_by(Conference, Team) |> 
   summarise(
     SeasonOffRebounds = sum(TeamOffRebounds),
     SeasonTotalRebounds = sum(TeamTotalRebounds)
-  ) %>%
+  ) |>
   mutate(
     SeasonDefRebounds = SeasonTotalRebounds - SeasonOffRebounds
-  ) %>% 
+  ) |> 
   select(
     -SeasonTotalRebounds
-  ) %>% 
+  ) |> 
   filter(Conference == "Big Ten") -> rebounds
 ```
 
 Now, the problem we have is that ggplot wants long data and this data is wide. So we need to use `tidyr` to make it long, just like we did in the transforming data chapter.
 
 ```{r}
-rebounds %>% 
+rebounds |> 
   pivot_longer(
     cols=starts_with("Season"), 
     names_to="Type", 
@@ -94,7 +94,7 @@ rebounds %>%
 What you can see now is that we have two rows for each team: One for rushing yards, one for passing yards. This is what ggplot needs. Save it to a new dataframe.
 
 ```{r}
-rebounds %>% 
+rebounds |> 
   pivot_longer(
     cols=starts_with("Season"), 
     names_to="Type", 

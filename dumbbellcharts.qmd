@@ -50,11 +50,11 @@ logs <- read_csv("data/footballlogs21.csv")
 For the first example, let's look at the difference between a team's giveaways -- turnovers lost -- versus takeaways, turnovers gained. To get this, we're going to add up all offensive turnovers and defensive turnovers for a team in a season and take a look at where they come out. To make this readable, I'm going to focus on the Big Ten.
 
 ```{r}
-turnovers <- logs %>%
-  group_by(Team, Conference) %>% 
+turnovers <- logs |>
+  group_by(Team, Conference) |> 
   summarise(
     Giveaways = sum(TotalTurnovers), 
-    Takeaways = sum(DefTotalTurnovers)) %>%
+    Takeaways = sum(DefTotalTurnovers)) |>
   filter(Conference == "Big Ten Conference")
 ```
 
@@ -144,7 +144,7 @@ ggplot() +
 How about some layering? 
 
 ```{r}
-nu <- turnovers %>% filter(Team == "Nebraska")
+nu <- turnovers |> filter(Team == "Nebraska")
 ```
 
 ```{r}

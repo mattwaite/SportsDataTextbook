@@ -44,7 +44,7 @@ logs <- read_csv("data/footballlogs20.csv")
 First, let's make the columns we'll need.
 
 ```{r}
-residualmodel <- logs %>% mutate(differential = TeamScore - OpponentScore, NetYards = OffensiveYards - DefYards)
+residualmodel <- logs |> mutate(differential = TeamScore - OpponentScore, NetYards = OffensiveYards - DefYards)
 ```
 
 Now let's create our model.
@@ -63,13 +63,13 @@ Last: Look at the p-value. We are looking for a p-value smaller than .05. At .05
 What we want to do now is look at those residuals. We want to add them to our individual game records. We can do that by creating two new fields -- predicted and residuals -- to our dataframe like this:
 
 ```{r}
-residualmodel <- residualmodel %>% mutate(predicted = predict(fit), residuals = residuals(fit))
+residualmodel <- residualmodel |> mutate(predicted = predict(fit), residuals = residuals(fit))
 ```
 
 Now we can sort our data by those residuals. Sorting in descending order gives us the games where teams overperformed the model. To make it easier to read, I'm going to use select to give us just the columns we need to see.
 
 ```{r}
-residualmodel %>% arrange(desc(residuals)) %>% select(Team, Opponent, Result, differential, NetYards, predicted, residuals)
+residualmodel |> arrange(desc(residuals)) |> select(Team, Opponent, Result, differential, NetYards, predicted, residuals)
 ```
 
 So looking at this table, what you see here are the teams who scored more than their net yards would indicate. One of them should jump off the page at you.
@@ -99,7 +99,7 @@ The blue line here separates underperformers from overperformers.
 Now let's look at it where it doesn't work: Penalties.
 
 ```{r}
-penalties <- logs %>% 
+penalties <- logs |> 
   mutate(
     differential = TeamScore - OpponentScore, 
     TotalPenalties = Penalties+DefPenalties,
@@ -126,7 +126,7 @@ penalties$residuals <- residuals(pfit)
 ```
 
 ```{r}
-penalties %>% arrange(desc(residuals)) %>% select(Team, Opponent, Result, TotalPenaltyYards, residuals)
+penalties |> arrange(desc(residuals)) |> select(Team, Opponent, Result, TotalPenaltyYards, residuals)
 ```
 
 First, note all of the biggest misses here are all blowout games. The worst games of the season, the worst being Clemson vs Georgia Tech. The model missed that differential by ... 65 points. The margin of victory? 66 points. In other words, this model is terrible. But let's look at it anyway.

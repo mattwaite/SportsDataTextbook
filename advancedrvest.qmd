@@ -32,10 +32,10 @@ url <- "https://www.sports-reference.com/cbb/seasons/2019-school-stats.html"
 But notice first, we don't want to grab the table. The table doesn't help us. We need to grab the only *link* in the table. So we can do that by using the table xpath node, then grabbing the anchor tags in the table, then get only the link out of them (instead of the linked text).
 
 ```{r}
-schools <- url %>%
-  read_html() %>%
-  html_nodes(xpath = '//*[@id="basic_school_stats"]') %>%
-  html_nodes("a") %>%
+schools <- url |>
+  read_html() |>
+  html_nodes(xpath = '//*[@id="basic_school_stats"]') |>
+  html_nodes("a") |>
   html_attr('href')
 ```
 
@@ -67,19 +67,19 @@ Fourth is the table itself, noting to ignore the headers. The last bit fixes the
 #| eval: false
 page <- read_html("https://www.sports-reference.com/cbb/schools/abilene-christian/2019-gamelogs.html")
   
-team <- page %>%
-  html_nodes(xpath = '//*[@id="meta"]/div[2]/h1/span[2]') %>%
+team <- page |>
+  html_nodes(xpath = '//*[@id="meta"]/div[2]/h1/span[2]') |>
   html_text()
 
-conference <- page %>%
-    html_nodes(xpath = '//*[@id="meta"]/div[2]/p[1]/a') %>%
+conference <- page |>
+    html_nodes(xpath = '//*[@id="meta"]/div[2]/p[1]/a') |>
     html_text()
 
-table <- page %>%
-  html_nodes(xpath = '//*[@id="sgl-basic"]') %>%
+table <- page |>
+  html_nodes(xpath = '//*[@id="sgl-basic"]') |>
   html_table(header=FALSE)
 
-table <- table[[1]] %>% rename(Game=X1, Date=X2, HomeAway=X3, Opponent=X4, W_L=X5, TeamScore=X6, OpponentScore=X7, TeamFG=X8, TeamFGA=X9, TeamFGPCT=X10, Team3P=X11, Team3PA=X12, Team3PPCT=X13, TeamFT=X14, TeamFTA=X15, TeamFTPCT=X16, TeamOffRebounds=X17, TeamTotalRebounds=X18, TeamAssists=X19, TeamSteals=X20, TeamBlocks=X21, TeamTurnovers=X22, TeamPersonalFouls=X23, Blank=X24, OpponentFG=X25, OpponentFGA=X26, OpponentFGPCT=X27, Opponent3P=X28, Opponent3PA=X29, Opponent3PPCT=X30, OpponentFT=X31, OpponentFTA=X32, OpponentFTPCT=X33, OpponentOffRebounds=X34, OpponentTotalRebounds=X35, OpponentAssists=X36, OpponentSteals=X37, OpponentBlocks=X38, OpponentTurnovers=X39, OpponentPersonalFouls=X40) %>% filter(Game != "") %>% filter(Game != "G") %>% mutate(Team=team, Conference=conference) %>% mutate_at(vars(-Team, -Conference, -Date, -Opponent, -HomeAway, -W_L), as.numeric) %>% mutate(Date = ymd(Date)) 
+table <- table[[1]] |> rename(Game=X1, Date=X2, HomeAway=X3, Opponent=X4, W_L=X5, TeamScore=X6, OpponentScore=X7, TeamFG=X8, TeamFGA=X9, TeamFGPCT=X10, Team3P=X11, Team3PA=X12, Team3PPCT=X13, TeamFT=X14, TeamFTA=X15, TeamFTPCT=X16, TeamOffRebounds=X17, TeamTotalRebounds=X18, TeamAssists=X19, TeamSteals=X20, TeamBlocks=X21, TeamTurnovers=X22, TeamPersonalFouls=X23, Blank=X24, OpponentFG=X25, OpponentFGA=X26, OpponentFGPCT=X27, Opponent3P=X28, Opponent3PA=X29, Opponent3PPCT=X30, OpponentFT=X31, OpponentFTA=X32, OpponentFTPCT=X33, OpponentOffRebounds=X34, OpponentTotalRebounds=X35, OpponentAssists=X36, OpponentSteals=X37, OpponentBlocks=X38, OpponentTurnovers=X39, OpponentPersonalFouls=X40) |> filter(Game != "") |> filter(Game != "G") |> mutate(Team=team, Conference=conference) |> mutate_at(vars(-Team, -Conference, -Date, -Opponent, -HomeAway, -W_L), as.numeric) |> mutate(Date = ymd(Date)) 
 ```
 
 Now what we're left with is how do we do this for ALL the teams. We need to send 353 requests to their servers to get each page. And each url is not the one we have -- we need to alter it.
@@ -104,19 +104,19 @@ for (i in schools){
   
   page <- read_html(school_url)
   
-  team <- page %>%
-    html_nodes(xpath = '//*[@id="meta"]/div[2]/h1/span[2]') %>%
+  team <- page |>
+    html_nodes(xpath = '//*[@id="meta"]/div[2]/h1/span[2]') |>
     html_text()
   
-  conference <- page %>%
-    html_nodes(xpath = '//*[@id="meta"]/div[2]/p[1]/a') %>%
+  conference <- page |>
+    html_nodes(xpath = '//*[@id="meta"]/div[2]/p[1]/a') |>
     html_text()
 
-  table <- page %>%
-    html_nodes(xpath = '//*[@id="sgl-basic"]') %>%
+  table <- page |>
+    html_nodes(xpath = '//*[@id="sgl-basic"]') |>
     html_table(header=FALSE)
 
-table <- table[[1]] %>% rename(Game=X1, Date=X2, HomeAway=X3, Opponent=X4, W_L=X5, TeamScore=X6, OpponentScore=X7, TeamFG=X8, TeamFGA=X9, TeamFGPCT=X10, Team3P=X11, Team3PA=X12, Team3PPCT=X13, TeamFT=X14, TeamFTA=X15, TeamFTPCT=X16, TeamOffRebounds=X17, TeamTotalRebounds=X18, TeamAssists=X19, TeamSteals=X20, TeamBlocks=X21, TeamTurnovers=X22, TeamPersonalFouls=X23, Blank=X24, OpponentFG=X25, OpponentFGA=X26, OpponentFGPCT=X27, Opponent3P=X28, Opponent3PA=X29, Opponent3PPCT=X30, OpponentFT=X31, OpponentFTA=X32, OpponentFTPCT=X33, OpponentOffRebounds=X34, OpponentTotalRebounds=X35, OpponentAssists=X36, OpponentSteals=X37, OpponentBlocks=X38, OpponentTurnovers=X39, OpponentPersonalFouls=X40) %>% filter(Game != "") %>% filter(Game != "G") %>% mutate(Team=team, Conference=conference) %>% mutate_at(vars(-Team, -Conference, -Date, -Opponent, -HomeAway, -W_L), as.numeric) %>% mutate(Date = ymd(Date))
+table <- table[[1]] |> rename(Game=X1, Date=X2, HomeAway=X3, Opponent=X4, W_L=X5, TeamScore=X6, OpponentScore=X7, TeamFG=X8, TeamFGA=X9, TeamFGPCT=X10, Team3P=X11, Team3PA=X12, Team3PPCT=X13, TeamFT=X14, TeamFTA=X15, TeamFTPCT=X16, TeamOffRebounds=X17, TeamTotalRebounds=X18, TeamAssists=X19, TeamSteals=X20, TeamBlocks=X21, TeamTurnovers=X22, TeamPersonalFouls=X23, Blank=X24, OpponentFG=X25, OpponentFGA=X26, OpponentFGPCT=X27, Opponent3P=X28, Opponent3PA=X29, Opponent3PPCT=X30, OpponentFT=X31, OpponentFTA=X32, OpponentFTPCT=X33, OpponentOffRebounds=X34, OpponentTotalRebounds=X35, OpponentAssists=X36, OpponentSteals=X37, OpponentBlocks=X38, OpponentTurnovers=X39, OpponentPersonalFouls=X40) |> filter(Game != "") |> filter(Game != "G") |> mutate(Team=team, Conference=conference) |> mutate_at(vars(-Team, -Conference, -Date, -Opponent, -HomeAway, -W_L), as.numeric) |> mutate(Date = ymd(Date))
 
   logs <- bind_rows(logs, table)  # binding them all together
   Sys.sleep(3)  # Sys.sleep(3) pauses the loop for 3s so as not to overwhelm website's server
@@ -160,10 +160,10 @@ Most tables that Sports Reference sites have are in plain vanilla HTML. But some
 #| eval: false
 h <- read_html('https://www.baseball-reference.com/leagues/MLB/2017-standard-pitching.shtml')
 
-df <- h %>% html_nodes(xpath = '//comment()') %>%    # select comment nodes
-    html_text() %>%    # extract comment text
-    paste(collapse = '') %>%    # collapse to a single string
-    read_html() %>%    # reparse to HTML
-    html_node('table') %>%    # select the desired table
+df <- h |> html_nodes(xpath = '//comment()') |>    # select comment nodes
+    html_text() |>    # extract comment text
+    paste(collapse = '') |>    # collapse to a single string
+    read_html() |>    # reparse to HTML
+    html_node('table') |>    # select the desired table
     html_table() 
 ```

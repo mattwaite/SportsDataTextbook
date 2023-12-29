@@ -51,7 +51,7 @@ logs <- read_csv("data/footballlogs21.csv")
 To do this, I've got some work to do. First, I need to mutate the outcomes of the games into 1s and 0s so I can add up the wins. We've done this before, so this won't be new to you, just adjusted slightly from basketball data.
 
 ```{r}
-winlosslogs <- logs %>% 
+winlosslogs <- logs |> 
   mutate(
     wins = case_when(
       grepl("W", Outcome) ~ 1, 
@@ -62,14 +62,14 @@ winlosslogs <- logs %>%
 Now I have some more work to do. My football logs data has the yards per play of each game, and I could average those together and get something very close to what I'm going to do, but averaging each games yards per play is not the same thing as calculating it, so we're going to calculate it. 
 
 ```{r}
-winlosslogs %>% 
-  group_by(Team, Conference) %>% 
+winlosslogs |> 
+  group_by(Team, Conference) |> 
   summarise(
     TotalPlays = sum(OffensivePlays), 
     TotalYards = sum(OffensiveYards), 
     DefensivePlays = sum(DefPlays), 
     DefensiveYards = sum(DefYards), 
-    TotalWins = sum(wins)) %>% 
+    TotalWins = sum(wins)) |> 
   mutate(
     OffensiveYPP = TotalYards/TotalPlays, 
     DefensiveYPP = DefensiveYards/DefensivePlays) -> ypp
@@ -110,7 +110,7 @@ ggplot() +
 And by now, you now know to add in the Big Ten as a layer, I would hope.
 
 ```{r}
-bigten <- ypp %>% filter(Conference == "Big Ten Conference")
+bigten <- ypp |> filter(Conference == "Big Ten Conference")
 ```
 
 ```{r}
@@ -129,8 +129,8 @@ ggplot() +
 Let's add some things to this chart to help us out. First, let's add lines that show us the average of all teams for those two metrics. So first, we need to calculate those. Because I have grouped data, it's going to require me to ungroup it so I can get just the total average of those two numbers. 
 
 ```{r}
-ypp %>% 
-  ungroup() %>% 
+ypp |> 
+  ungroup() |> 
   summarise(
     offense = mean(OffensiveYPP), 
     defense = mean(DefensiveYPP)

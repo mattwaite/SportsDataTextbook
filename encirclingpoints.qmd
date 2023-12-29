@@ -42,7 +42,7 @@ glue("<pre><p><strong>For this walkthrough:</strong></p><p>{dllink}</p></pre>")
 And while we're loading it, let's filter out anyone who hasn't played. 
 
 ```{r}
-players <- read_csv("data/players20.csv") %>% filter(MP > 0)
+players <- read_csv("data/players20.csv") |> filter(MP > 0)
 ```
 
 We've done this before, but let's make a standard scatterplot of minutes and points. 
@@ -56,7 +56,7 @@ So we can see right away that there are some dots at the very top that we'd want
 Like we have done in the past, let's make a dataframe of top scorers. We'll set the cutoff at 650 points in a season. 
 
 ```{r}
-topscorers <- players %>% filter(PTS > 650)
+topscorers <- players |> filter(PTS > 650)
 ```
 
 And like we've done in the past, we can add it to the chart with another geom_point. We'll make all the players grey, we'll make all the top scorers black.
@@ -132,7 +132,7 @@ Works the same way -- use layering and color smartly and tell the story with all
 Let's grab the top three point attempt takers on the Nebraska roster. As of now, only one will be coming back. 
 
 ```{r}
-nutop <- players %>% filter(Team == "Nebraska Cornhuskers") %>% top_n(3, `3PA`)
+nutop <- players |> filter(Team == "Nebraska Cornhuskers") |> top_n(3, `3PA`)
 ```
 
 And just like above, we can plug in our players geom, our nutop dataframe into another geom, then encircle that dataframe. Slap some headlines and annotations on it and here's what we get:

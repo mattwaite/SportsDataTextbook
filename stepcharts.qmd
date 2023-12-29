@@ -50,16 +50,16 @@ Here we're going to look at the scoring differential of teams. If you score more
 The first thing we're going to do is calculate that differential. Then, we'll group it by the team. After that, we're going to summarize using a new function called `cumsum` or cumulative sum -- the sum for each game as we go forward. So game 1's cumsum is the differential of that game. Game 2's cumsum is Game 1 + Game 2. Game 3 is Game 1 + 2 + 3 and so on. 
 
 ```{r}
-difflogs <- logs %>% 
-  mutate(Differential = TeamScore - OpponentScore) %>% 
-  group_by(Team) %>% 
+difflogs <- logs |> 
+  mutate(Differential = TeamScore - OpponentScore) |> 
+  group_by(Team) |> 
   mutate(CumDiff = cumsum(Differential))
 ```
 
 Now that we have the cumulative sum for each, let's filter it down to just Big Ten teams.
 
 ```{r}
-bigdiff <- difflogs %>% filter(Conference == "Big Ten")
+bigdiff <- difflogs |> filter(Conference == "Big Ten")
 ```
 
 The step chart is it's own geom, so we can employ it just like we have the others. It works almost exactly the same as a line chart, but it uses the cumulative sum instead of a regular value and, as the name implies, creates a step like shape to the line instead of a curve.
@@ -83,8 +83,8 @@ From this, we can see a handful of teams in the Big Ten had negative point diffe
 Let's look at the top team plus Nebraska.
 
 ```{r}
-nu <- bigdiff %>% filter(Team == "Nebraska")
-il <- bigdiff %>% filter(Team == "Illinois")
+nu <- bigdiff |> filter(Team == "Nebraska")
+il <- bigdiff |> filter(Team == "Illinois")
 ```
 
 Let's introduce a couple of new things here. First, note when I take the color OUT of the aesthetic, the legend disappears. 

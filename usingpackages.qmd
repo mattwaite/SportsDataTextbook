@@ -2,29 +2,29 @@
 
 There is a growing number of packages and repositories of sports data, largely because there's a growing number of people who want to analyze that data. We've [done it ourselves with simple Google Sheets tricks](http://mattwaite.github.io/sports/data-structures-and-types.html#a-simple-way-to-get-data). Then there's [RVest, which is a method of scraping the data yourself from websites](http://mattwaite.github.io/sports/intro-to-rvest.html). But with these packages, someone has done the work of gathering the data for you. All you have to learn are the commands to get it.
 
-One very promising collection of libraries is something called the [SportsDataverse](https://sportsdataverse.org/), which has a collection of packages covering specific sports, all of which are in various stages of development. Some are more complete than others, but they are all being actively worked on by developers. Packages of interest in this class are: 
+One very promising collection of libraries is something called the [SportsDataverse](https://sportsdataverse.org/), which has a collection of packages covering specific sports, all of which are in various stages of development. Some are more complete than others, but they are all being actively worked on by developers. Packages of interest in this class are:
 
-* [cfbfastR, for college football](https://saiemgilani.github.io/cfbfastR/).
-* [hoopR, for men's professional and college basketball](https://saiemgilani.github.io/hoopR/).
-* [wehoop, for women's professional and college basketball](https://saiemgilani.github.io/wehoop/).
-* [baseballr, for professional and college baseball](https://billpetti.github.io/baseballr/).
-* [worldfootballR, for soccer data from around the world](https://jaseziv.github.io/worldfootballR/).
-* [hockeyR, for NHL hockey data](https://hockeyr.netlify.app/)
-* [recruitR, for college sports recruiting](https://saiemgilani.github.io/recruitR/)
+-   [cfbfastR, for college football](https://saiemgilani.github.io/cfbfastR/).
+-   [hoopR, for men's professional and college basketball](https://saiemgilani.github.io/hoopR/).
+-   [wehoop, for women's professional and college basketball](https://saiemgilani.github.io/wehoop/).
+-   [baseballr, for professional and college baseball](https://billpetti.github.io/baseballr/).
+-   [worldfootballR, for soccer data from around the world](https://jaseziv.github.io/worldfootballR/).
+-   [hockeyR, for NHL hockey data](https://hockeyr.netlify.app/)
+-   [recruitR, for college sports recruiting](https://saiemgilani.github.io/recruitR/)
 
-Not part of the SportsDataverse, but in the same neighborhood, is [nflfastR](https://www.nflfastr.com/), which can provide NFL play-by-play data. 
+Not part of the SportsDataverse, but in the same neighborhood, is [nflfastR](https://www.nflfastr.com/), which can provide NFL play-by-play data.
 
-Because they're all under development, not all of them can be installed with just a simple `install.packages("something")`. Some require a little work, some require API keys. 
+Because they're all under development, not all of them can be installed with just a simple `install.packages("something")`. Some require a little work, some require API keys.
 
-The main issue for you is to read the documentation carefully. 
+The main issue for you is to read the documentation carefully.
 
 ## Using cfbfastR as a cautionary tale
 
-cfbfastR presents us a good view into the promise and peril of libraries like this. 
+cfbfastR presents us a good view into the promise and peril of libraries like this.
 
-[First, to make this work, follow the installation instructions](https://saiemgilani.github.io/cfbfastR/) and then follow how to get an API key from College Football Data and how to add that to your environment. But maybe wait to do that until you read the whole section. 
+[First, to make this work, follow the installation instructions](https://saiemgilani.github.io/cfbfastR/) and then follow how to get an API key from College Football Data and how to add that to your environment. But maybe wait to do that until you read the whole section.
 
-After installations, we can load it up. 
+After installations, we can load it up.
 
 ```{r}
 #| message: false
@@ -33,7 +33,7 @@ library(tidyverse)
 library(cfbfastR)
 ```
 
-You might be thinking, "Oh wow, I can get play by play data for college football. Let's look at what are the five most heartbreaking plays of this doomed Nebraska season." Because what better way to determine doom than by looking at the steepest dropoff in win probability, which is included in the data. 
+You might be thinking, "Oh wow, I can get play by play data for college football. Let's look at what are the five most heartbreaking plays of this doomed Nebraska season." Because what better way to determine doom than by looking at the steepest dropoff in win probability, which is included in the data.
 
 Great idea. Let's do it.
 
@@ -80,16 +80,16 @@ The sys.sleep bits just pauses for two seconds before running the next block. Si
 Now you're ready to look at heartbreak. How do we define heartbreak? How about like this: you first have to lose the game, it comes in the third or fourth quarter, it involves a play (i.e. not a timeout), and it results in the biggest drop in win probability.
 
 ```{r}
-nuplays %>% 
-  filter(pos_team == "Nebraska" & def_pos_team != "Fordham" & def_pos_team != "Buffalo" & def_pos_team != "Northwestern" & play_type != "Timeout") %>% 
-  filter(period == 3 | period == 4) %>% 
-  mutate(HeartbreakLevel = wp_before - wp_after) %>% 
-  arrange(desc(HeartbreakLevel)) %>% 
-  top_n(5, wt=HeartbreakLevel) %>%
+nuplays |> 
+  filter(pos_team == "Nebraska" & def_pos_team != "Fordham" & def_pos_team != "Buffalo" & def_pos_team != "Northwestern" & play_type != "Timeout") |> 
+  filter(period == 3 | period == 4) |> 
+  mutate(HeartbreakLevel = wp_before - wp_after) |> 
+  arrange(desc(HeartbreakLevel)) |> 
+  top_n(5, wt=HeartbreakLevel) |>
   select(period, clock.minutes, def_pos_team, play_type, play_text)
 ```
 
-The most heartbreaking play of the season? A fourth quarter fumble against Michigan. Next up: Basically the entire fourth quarter against Michigan State. 
+The most heartbreaking play of the season? A fourth quarter fumble against Michigan. Next up: Basically the entire fourth quarter against Michigan State.
 
 ## Another example
 
@@ -99,9 +99,9 @@ The wehoop package is mature enough to have a version on CRAN, so you can instal
 library(wehoop)
 ```
 
-Many of these libraries have more than play-by-play data. For example, wehoop has box scores and player data for both the WNBA and college basketball. From personal experience, WNBA data isn't hard to get, but women's college basketball is a giant pain. 
+Many of these libraries have more than play-by-play data. For example, wehoop has box scores and player data for both the WNBA and college basketball. From personal experience, WNBA data isn't hard to get, but women's college basketball is a giant pain.
 
-So, who is Nebraska's single season points champion over the last five seasons? 
+So, who is Nebraska's single season points champion over the last five seasons?
 
 ```{r}
 progressr::with_progress({
@@ -109,19 +109,19 @@ progressr::with_progress({
 })
 ```
 
-With progressr, you'll see a progress bar in the console, which lets you know that your command is still working, since some of these requests take minutes to complete. Player box scores is quicker -- five seasons was a matter of seconds. 
+With progressr, you'll see a progress bar in the console, which lets you know that your command is still working, since some of these requests take minutes to complete. Player box scores is quicker -- five seasons was a matter of seconds.
 
 If you look at the wbb_player_box data we now have, we have each player in each game over each season -- more than 300,000 records. Finding out who Nebraska's top 10 single-season scoring leaders are is a matter of grouping, summing and filtering.
 
 ```{r}
 #| message: false
 #| warning: false
-wbb_player_box %>% 
-  filter(team_short_display_name == "Nebraska") %>% 
-  group_by(athlete_display_name, season) %>% 
-  summarise(totalPoints = sum(as.numeric(pts))) %>% 
-  arrange(desc(totalPoints)) %>%
-  ungroup() %>%
+wbb_player_box |> 
+  filter(team_short_display_name == "Nebraska") |> 
+  group_by(athlete_display_name, season) |> 
+  summarise(totalPoints = sum(as.numeric(points))) |> 
+  arrange(desc(totalPoints)) |>
+  ungroup() |>
   top_n(10, wt=totalPoints)
   
 ```

@@ -46,14 +46,14 @@ attendance <- read_csv("data/attendance.csv")
 Making a quick percent change.
 
 ```{r}
-attendance <- attendance %>% mutate(change = ((`2018`-`2017`)/`2017`)*100)
+attendance <- attendance |> mutate(change = ((`2018`-`2017`)/`2017`)*100)
 ```
 
 Let's chart the top 10 and bottom 10 of college football ticket growth ... and shrinkage.
 
 ```{r}
-top10 <- attendance %>% top_n(10, wt=change)
-bottom10 <- attendance %>% top_n(10, wt=-change)
+top10 <- attendance |> top_n(10, wt=change)
+bottom10 <- attendance |> top_n(10, wt=-change)
 ```
 
 Okay, now to do this I need to **save my plots to an object**. We do this the same way we save things to a dataframe -- with the arrow. We'll make two identical bar charts, one with the top 10 and one with the bottom 10.
@@ -119,8 +119,8 @@ plot_grid(bar1, bar2)
 What's missing here? Color. Our eyes aren't drawn to anything (except maybe the top and bottom). So we need to help that. A bar chart without context or color to draw attention to something isn't much of a bar chart. Same with a line chart -- if your line chart has one line, no context, no color, it's going to fare poorly.
 
 ```{r}
-cc <- bottom10 %>% filter(Institution == "Coastal Caro.")
-gs <- top10 %>% filter(Institution == "Ga. Southern")
+cc <- bottom10 |> filter(Institution == "Coastal Caro.")
+gs <- top10 |> filter(Institution == "Ga. Southern")
 ```
 
 ```{r}

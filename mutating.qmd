@@ -52,7 +52,7 @@ head(attendance)
 The code to calculate percent change is pretty simple. Remember, with `summarize`, we used `n()` to count things. With `mutate`, we use very similar syntax to calculate a new value using other values in our dataset. So in this case, we're trying to do (new-old)/old, but we're doing it with fields. If we look at what we got when we did `head`, you'll see there's \`2018\` as the new data, and we'll use \`2017\` as the old data. So we're looking at one year. Then, to help us, we'll use arrange again to sort it, so we get the fastest growing school over one year.
 
 ```{r}
-attendance %>% mutate(
+attendance |> mutate(
   change = (`2018` - `2017`)/`2017`
 ) 
 ```
@@ -60,7 +60,7 @@ attendance %>% mutate(
 What do we see right away? Do those numbers look like we expect them to? No. They're a decimal expressed as a percentage. So let's fix that by multiplying by 100.
 
 ```{r}
-attendance %>% mutate(
+attendance |> mutate(
   change = ((`2018` - `2017`)/`2017`)*100
 ) 
 ```
@@ -68,9 +68,9 @@ attendance %>% mutate(
 Now, does this ordering do anything for us? No. Let's fix that with arrange.
 
 ```{r}
-attendance %>% mutate(
+attendance |> mutate(
   change = ((`2018` - `2017`)/`2017`)*100
-) %>% arrange(desc(change))
+) |> arrange(desc(change))
 ```
 
 So who had the most growth last year from the year before? Something going on at Georgia Southern.
@@ -124,8 +124,8 @@ So what does True Shooting Percentage look like in code?
 Let's think about this differently. Who had the best true shooting season last year?
 
 ```{r}
-players %>%
-  mutate(trueshooting = (PTS/(2*(FGA + (.44*FTA))))*100) %>%
+players |>
+  mutate(trueshooting = (PTS/(2*(FGA + (.44*FTA))))*100) |>
   arrange(desc(trueshooting))
 ```
 

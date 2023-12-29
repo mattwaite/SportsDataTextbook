@@ -54,7 +54,7 @@ But is there one?
 We're going create a new dataframe called newcorrelations that takes our data that we imported and adds a column called `differential` because we don't have separate offense and defense penalties, and then we'll use correlations to see how related those two things are.
 
 ```{r}
-newcorrelations <- correlations %>% 
+newcorrelations <- correlations |> 
   mutate(
     differential = TeamScore - OpponentScore, 
     TotalPenalties = Penalties+DefPenalties, 
@@ -65,7 +65,7 @@ newcorrelations <- correlations %>%
 In R, there is a `cor` function, and it works much the same as `mean` or `median`. So we want to see if `differential` is correlated with `TotalPenaltyYards`, which is the yards of penalties a team gets in a game. We do that by referencing `differential` and `TotalPenaltyYards` and specifying we want a `pearson` correlation. The number we get back is the correlation coefficient.
 
 ```{r}
-newcorrelations %>% summarise(correlation = cor(differential, TotalPenaltyYards, method="pearson"))
+newcorrelations |> summarise(correlation = cor(differential, TotalPenaltyYards, method="pearson"))
 ```
 
 So on a scale of -1 to 1, where 0 means there's no relationship at all and 1 or -1 means a perfect relationship, penalty yards and whether or not the team scores more points than it give up are at -0.0068. You could say they're .7 percent related toward the negative -- more penalties, the lower your differential. Another way to say it? They're 99.3 percent not related.
@@ -73,7 +73,7 @@ So on a scale of -1 to 1, where 0 means there's no relationship at all and 1 or 
 What about the number of penalties instead of the yards?
 
 ```{r}
-newcorrelations %>% 
+newcorrelations |> 
   summarise(correlation = cor(differential, TotalPenalties, method="pearson"))
 ```
 So wait, what does this all mean? 
@@ -113,13 +113,13 @@ So we've **firmly** established that penalties aren't predictive. But what is?
 
 So instead of looking at penalty yards, let's make a new metric: Net Yards. Can we predict the score differential by looking at the yards a team gained minus the yards they gave up. 
 ```{r}
-regressions <- newcorrelations %>% mutate(NetYards = OffensiveYards - DefYards)
+regressions <- newcorrelations |> mutate(NetYards = OffensiveYards - DefYards)
 ```
 
 First, let's look at the correlation coefficent. 
 
 ```{r}
-regressions %>% 
+regressions |> 
   summarise(correlation = cor(differential, NetYards, method="pearson"))
 ```
 

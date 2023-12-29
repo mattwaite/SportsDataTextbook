@@ -51,6 +51,7 @@ book:
     - usingpackages.qmd
     - sportsreferencecsvs.qmd
     - onboarding.qmd
+    - tutorials.qmd
 
 bibliography: references.bib
 
